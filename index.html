@@ -38,7 +38,7 @@ body::before{
   inset:0;
   z-index:1;
   pointer-events:none;
-  background: rgba(255,255,255,0.03);
+  background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.12), transparent 70%);
   animation:fogMove 18s infinite alternate ease-in-out;
 }
 @keyframes fogMove{
@@ -80,6 +80,7 @@ canvas{
   width:100%;
   height:100%;
   background: rgba(26,23,19,0.85); /* FIXED */
+  backdrop-filter: blur(2px);
 
   padding:3rem;
   transform-origin:left;
@@ -329,17 +330,7 @@ function handleSwipe(){
 /* CURSOR GLOW */
 const glow=document.querySelector(".cursor-glow");
 let mouse={x:0,y:0};
-let lastMove = 0;
-
-document.addEventListener("mousemove", e=>{
-  let now = Date.now();
-  if(now - lastMove < 20) return;
-  lastMove = now;
-
-  glow.style.left = e.clientX+"px";
-  glow.style.top = e.clientY+"px";
-});
-  
+document.addEventListener("mousemove",e=>{
   mouse.x=e.clientX;
   mouse.y=e.clientY;
   glow.style.left=mouse.x+"px";
@@ -358,7 +349,7 @@ resize();
 window.addEventListener("resize",resize);
 
 let particles=[];
-for(let i=0;i<30;i++){
+for(let i=0;i<80;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
@@ -393,12 +384,12 @@ function animate(){
     ctx.beginPath();
     ctx.fillStyle="rgba(255,230,180,1)";
     ctx.shadowColor="rgba(255,230,180,1)";
-    ctx.shadowBlur=15;
+    ctx.shadowBlur=40;
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
     ctx.fill();
   });
 
-  setTimeout(() => requestAnimationFrame(animate), 30);
+  requestAnimationFrame(animate);
 }
 animate();
 

@@ -1,289 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KriSh — Space</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Playfair+Display&display=swap" rel="stylesheet">
-
-<style>
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet"><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cormorant Garamond',serif;background:#050814;color:#e6dccf;overflow:hidden}
+body{font-family:'SF Pro Display',system-ui;background:#000;color:#f5f5f7;overflow:hidden}
 canvas{position:fixed;inset:0;z-index:0}
 
-/* LOADER */
-.loader{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:100;animation:fadeOut 2s forwards 3s}
-.loader .star{width:4px;height:4px;background:#fff;border-radius:50%;animation:expand 2s ease-out forwards}
-.loader h1{margin-top:2rem;font-size:2rem;opacity:0;animation:fadeIn 2s forwards 1.5s}
-@keyframes expand{to{transform:scale(200);opacity:0}}
-@keyframes fadeIn{to{opacity:1}}
-@keyframes fadeOut{to{opacity:0;pointer-events:none}}
+/* CINEMATIC DEPTH FOG */
+body::after{
+ content:'';
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.75));
+ pointer-events:none;
+}
 
-/* SCENES */
-.scene{position:absolute;width:100%;height:100%;padding:3rem;opacity:0;transform:scale(1.2);transition:1.2s}
-.scene.active{opacity:1;transform:scale(1)}
-.scene.exit{opacity:0;transform:scale(0.7);filter:blur(15px)}
-
-h1{font-size:clamp(4rem,10vw,8rem);background:linear-gradient(90deg,#fff,#ffd76a,#7aa2ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.subtitle{margin-top:1rem;font-style:italic}
-
-.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-.card{padding:1rem;border:1px solid rgba(255,215,100,.3);transition:.4s}
-
-.contact a{display:block;margin:1rem 0;color:#ffd76a;text-decoration:none}
-
-.end{display:flex;align-items:center;justify-content:center;height:100%;text-align:center;font-size:1.5rem}
-
-/* ANIME CHARACTER */
-.character{
+.scene{
  position:absolute;
- bottom:0;
- right:5%;
- width:200px;
- height:300px;
- background:url('https://raw.githubusercontent.com/krishnamdev127/krish-space/refs/heads/main/anime.png') center/cover no-repeat;
- filter:drop-shadow(0 0 20px rgba(120,180,255,.5));
- animation:floatChar 4s ease-in-out infinite;
+ width:100vw;height:100vh;
+ display:flex;align-items:center;justify-content:center;
+ opacity:0;
+ transform:translateY(60px) scale(.96);
+ transition:1.2s cubic-bezier(.16,1,.3,1);
+ pointer-events:none;
+}
+.scene.active{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.scene.exit{opacity:0;transform:translateY(-60px) scale(.94)}
+
+.container{
+ max-width:720px;width:90%;text-align:center;
+ backdrop-filter: blur(8px);
+ background: rgba(255,255,255,0.03);
+ border-radius: 24px;
+ padding:2rem;
 }
 
-@keyframes floatChar{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-10px)}
+h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:600}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:1rem}
+p{opacity:.75;margin:.6rem 0;line-height:1.6}
+
+.btn{
+ display:inline-block;margin-top:1.5rem;padding:.7rem 1.4rem;
+ border-radius:999px;
+ background:rgba(255,255,255,.08);
+ border:1px solid rgba(255,255,255,.15);
+ cursor:pointer;
+ transition:.3s;
 }
+.btn:hover{transform:scale(1.05);background:rgba(255,255,255,.15)}
 
-/* CURSOR */
-.cursor{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(120,180,255,.25),transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:10;filter:blur(20px)}
+.link{display:block;margin:.7rem 0;color:#9ecbff;text-decoration:none}
 
-</style>
-</head>
+.cursor{position:fixed;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(120,180,255,.15),transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:10;filter:blur(30px)}
 
-<body>
+.fragment{position:absolute;font-size:.85rem;padding:.4rem .7rem;border-radius:999px;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);color:#d6e6ff;opacity:0;box-shadow:0 0 25px rgba(120,180,255,0.2)}
 
-<div class="loader">
-  <div class="star"></div>
-  <h1>KriSh</h1>
-</div>
-
-<div class="cursor"></div>
-<canvas id="bg"></canvas>
-
-<!-- AUDIO (AUTO + LOW VOLUME) -->
-<audio id="ambient" loop preload="auto" muted>
-  <source src="https://github.com/krishnamdev127/krish-space/raw/refs/heads/main/webpage_bg.mp3">
-</audio>
-
-<div class="scene active">
-  <h1>KriSh.</h1>
-  <p class="subtitle" id="type"></p>
-  <div class="character"></div>
-</div>
-
-<div class="scene">
-  <h2>Fields of Study</h2>
-  <div class="grid">
-    <div class="card">History</div>
-    <div class="card">Geography</div>
-    <div class="card">Political Science</div>
-    <div class="card">Literature</div>
-    <div class="card">Psychology</div>
-    <div class="card">Philosophy</div>
-  </div>
-</div>
-
-<div class="scene">
-  <h2>Fragments</h2>
-  <div>“We are such stuff as dreams are made on.”</div>
-  <div>“What you seek is seeking you.”</div>
-  <div>“Indeed, with hardship comes ease.”</div>
-</div>
-
-<div class="scene">
-  <h2>Connect</h2>
-  <div class="contact">
-    <a href="mailto:krishnamdev127@gmail.com">Email</a>
-    <a href="https://instagram.com/kr_ndv" target="_blank">Instagram</a>
-  </div>
-</div>
-
-<div class="scene">
-  <div class="end">Made with love, curiosity, and a bit of chaos ✨</div>
-</div>
-
-<script>
-
-/* AUDIO FIX (FULLY WORKING) */
-const audio = document.getElementById("ambient");
-
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-const analyser = audioCtx.createAnalyser();
-
-let source;
-let audioStarted = false;
-
-function setupAudio(){
-  if(!source){
-    source = audioCtx.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-    analyser.fftSize = 64;
-  }
-}
-
-function startAudio(){
-  if(audioStarted) return;
-  audioStarted = true;
-
-  setupAudio();
-
-  audioCtx.resume(); // 🔥 MOST IMPORTANT FIX
-
-  audio.muted = false;
-  audio.volume = 0.2;
-
-  audio.play().catch(()=>{});
-
-  document.removeEventListener("click", startAudio);
-  document.removeEventListener("keydown", startAudio);
-  document.removeEventListener("touchstart", startAudio);
-}
-
-/* TRY AUTOPLAY (WILL FAIL SILENTLY SOMETIMES) */
-audio.muted = true;
-audio.play().then(()=>{
-  setTimeout(()=>{
-    startAudio();
-  },500);
-}).catch(()=>{
-  // fallback
-  document.addEventListener("click", startAudio);
-  document.addEventListener("keydown", startAudio);
-  document.addEventListener("touchstart", startAudio);
-});
-
-/* SMOOTH LOOP */
-audio.addEventListener("ended", () => {
-  audio.currentTime = 0;
-  audio.play();
-});
-
-/* TYPE */
-const t="A record of thoughts, curiosities, and quiet observations.";
-let i=0;
-(function type(){if(i<t.length){document.getElementById("type").innerHTML+=t[i++];setTimeout(type,35)}})();
+</style></head><body>
+<div class="cursor" id="cursor"></div>
+<canvas id="bg"></canvas><!-- HOME --><div class="scene active"><div class="container">
+<h1>KriSh</h1>
+<p>Student | Reader | Tech Enthusiast | Just a Thinker</p>
+<div class="btn" id="continueBtn">Continue</div>
+</div></div><!-- ABOUT --><div class="scene"><div class="container">
+<h2>The Mind Map</h2>
+<p>I study History, Geography, Political Science, English, and Hindi.</p>
+<p>And deeply curious about Philosophy (the 'how to live'), Psychology (the 'why we act'), and Literature (the 'what we dream').</p>
+</div></div><!-- BOOKS --><div class="scene"><div class="container">
+<h2>Curiosities</h2>
+<p>A quick-fire list of things I've been digging into lately:
+Psychology: Understanding behavioral patterns.
+Tech: Tracking the evolution of AI and digital ethics.
+Geography: Studying how climate change reshapes modern borders.</p>
+</div></div><!-- GALLERY --><div class="scene"><div class="container">
+<h2>Remember</h2>
+<p>Maybe your garden isn't growing because every time a flower grows you cut it to prove to someone that you're a gardener.</p>
+<p>I don't know said but very hard.</p>
+</div></div><!-- CONTACT --><div class="scene"><div class="container">
+<h2>Get in Touch</h2>
+<p>Let’s Start a Conversation...</p>
+<a class="link" href="mailto:krishnamdev127@gmail.com">Email</a>
+<a class="link" href="https://instagram.com/kr_ndv" target="_blank">Instagram</a>
+<a class="link" href="tel:9696025996">Call</a>
+</div></div><!-- EXIT --><div class="scene"><div class="container">
+<h2>The Exit Gate</h2>
+<p>It means a lot that you took the time to scroll through my corner of the internet.</p>
+<p>Closing Thought: "Cogito, ergo sum" (I think, therefore I am.) - René Descartes.</p>
+</div></div><script>
 
 /* NAV */
-let current=0;
-const scenes=document.querySelectorAll('.scene');
-let busy=false;
+let current=0;const scenes=document.querySelectorAll('.scene');let busy=false;
+function go(n){if(busy||n===current)return;busy=true;scenes[current].classList.add('exit');setTimeout(()=>{scenes[current].classList.remove('active','exit');scenes[n].classList.add('active');current=n;busy=false;},900)}
+document.getElementById("continueBtn").addEventListener("click",()=>go(1));
+window.addEventListener('wheel',e=>{if(e.deltaY>0&&current<5)go(current+1);if(e.deltaY<0&&current>0)go(current-1)});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowDown')go(Math.min(current+1,5));if(e.key==='ArrowUp')go(Math.max(current-1,0));});
 
-function go(next){
- if(busy||next===current) return;
- busy=true;
- scenes[current].classList.add('exit');
- setTimeout(()=>{
-   scenes[current].classList.remove('active','exit');
-   scenes[next].classList.add('active');
-   current=next;
-   busy=false;
- },700);
-}
-
-let last=0;
-window.addEventListener('wheel',e=>{
- let now=Date.now();
- if(now-last<700) return;
- if(e.deltaY>0 && current<scenes.length-1) go(current+1);
- if(e.deltaY<0 && current>0) go(current-1);
- last=now;
-});
-
-document.addEventListener('keydown',e=>{
- if(e.key==='ArrowDown'||e.key==='ArrowRight') go(Math.min(current+1,scenes.length-1));
- if(e.key==='ArrowUp'||e.key==='ArrowLeft') go(Math.max(current-1,0));
-});
-
+/* TOUCH */
 let startY=0;
 document.addEventListener('touchstart',e=>startY=e.touches[0].clientY);
-document.addEventListener('touchend',e=>{
- let endY=e.changedTouches[0].clientY;
- if(startY-endY>50) go(Math.min(current+1,scenes.length-1));
- if(endY-startY>50) go(Math.max(current-1,0));
-});
+document.addEventListener('touchend',e=>{let endY=e.changedTouches[0].clientY;if(startY-endY>50)go(Math.min(current+1,5));if(endY-startY>50)go(Math.max(current-1,0));});
 
-/* CURSOR */
-let mouse={x:0,y:0};
-document.addEventListener('mousemove',e=>{
- mouse.x=e.clientX; mouse.y=e.clientY;
- document.querySelector('.cursor').style.left=mouse.x+'px';
- document.querySelector('.cursor').style.top=mouse.y+'px';
-});
+/* CURSOR LAG */
+let mouse={x:0,y:0}, cx=0, cy=0;
+const cursor=document.getElementById("cursor");
+document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+function cursorLoop(){cx+=(mouse.x-cx)*0.1;cy+=(mouse.y-cy)*0.1;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(cursorLoop)}
+cursorLoop();
 
-/* CANVAS */
-const canvas=document.getElementById('bg');
-const ctx=canvas.getContext('2d');
+/* STARFIELD + BREATH */
+const c=document.getElementById('bg');const ctx=c.getContext('2d');
+function resize(){c.width=innerWidth;c.height=innerHeight}resize();window.onresize=resize;
+let stars=[...Array(140)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,z:Math.random()*3}))
+let t=0;
 
-function resize(){
-  canvas.width=innerWidth;
-  canvas.height=innerHeight;
-}
-resize();
-window.onresize=resize;
+const zones=[{x:innerWidth*0.3,y:innerHeight*0.5},{x:innerWidth*0.7,y:innerHeight*0.4}];
 
-/* STARS */
-let stars=[...Array(80)].map(()=>({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  a:Math.random()*6
-}));
+function shoot(){let x=Math.random()*c.width,y=0;function d(){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-200,y-200);ctx.strokeStyle='white';ctx.stroke();x+=10;y+=10;if(y<c.height)requestAnimationFrame(d)}d()}
+setInterval(()=>{if(Math.random()<0.2)shoot()},3500);
 
-const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-/* DRAW LOOP */
 function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+ t+=0.01;
+ ctx.clearRect(0,0,c.width,c.height);
+ stars.forEach(s=>{
+  let pulse=Math.sin(t+s.z)*0.5+1;
 
-  let avg = 0;
-
-  if(audioCtx.state === "running"){
-    analyser.getByteFrequencyData(dataArray);
-
-    let sum = 0;
-    for(let i=0;i<dataArray.length;i++) sum += dataArray[i];
-    avg = sum / dataArray.length;
-  }
-
-  stars.forEach(s=>{
-    s.a += 0.01;
-
-    let dx = mouse.x - s.x;
-    let dy = mouse.y - s.y;
-    let d = Math.sqrt(dx*dx + dy*dy);
-
-    if(d < 120){
-      s.x -= dx * 0.02;
-      s.y -= dy * 0.02;
-    }
-
-    s.x += Math.cos(s.a)*0.3;
-    s.y += Math.sin(s.a)*0.3;
-
-    let glow = avg / 255;
-
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(255,215,100,${0.5 + glow})`;
-    ctx.shadowColor = `rgba(255,215,100,${glow})`;
-    ctx.shadowBlur = 20 * glow;
-
-    ctx.arc(s.x, s.y, 2 + glow*2, 0, Math.PI*2);
-    ctx.fill();
+  zones.forEach(z=>{
+    let dx=z.x-s.x, dy=z.y-s.y;
+    s.x+=dx*0.00005; s.y+=dy*0.00005;
   });
 
-  requestAnimationFrame(draw);
-}
+  s.x+=(mouse.x-c.width/2)*0.0005*s.z;
+  s.y+=(mouse.y-c.height/2)*0.0005*s.z;
 
+  if(s.x<0)s.x=c.width;if(s.x>c.width)s.x=0;
+  if(s.y<0)s.y=c.height;if(s.y>c.height)s.y=0;
+
+  ctx.beginPath();
+  ctx.arc(s.x,s.y,s.z*pulse,0,Math.PI*2);
+  ctx.fillStyle=`rgba(255,255,255,${0.5+pulse*0.2})`;
+  ctx.fill();
+ });
+ requestAnimationFrame(draw);
+}
 draw();
 
-</script>
+/* CINEMATIC MODE */
+let cinematic=false;
+document.addEventListener('keydown',e=>{
+ if(e.key==='c'){
+   cinematic=!cinematic;
+   document.body.style.transition="1s";
+   document.body.style.background=cinematic?"#020202":"#000";
+ }
+});
 
-</body>
+</script></body>
 </html>

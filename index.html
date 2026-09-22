@@ -6,6 +6,35 @@
 <meta name="theme-color" content="#0c0a09">
 <meta name="description" content="KriSh — Student | Reader | Tech Enthusiast | Just a Thinker">
 <title>KriSh — Synapse</title>
+
+<!-- sharing essentials: after deploying, replace the two URL placeholders below with your real domain
+     and drop a 1200x630 og-cover.jpg next to the index file -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KriSh — Synapse">
+<meta property="og:title" content="KriSh — Synapse">
+<meta property="og:description" content="Student · Reader · Tech Enthusiast · Just a Thinker — a portfolio that thinks back.">
+<meta property="og:url" content="https://your-domain.com/">
+<meta property="og:image" content="https://your-domain.com/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KriSh — Synapse">
+<meta name="twitter:description" content="Student · Reader · Tech Enthusiast · Just a Thinker — a portfolio that thinks back.">
+<meta name="twitter:image" content="https://your-domain.com/og-cover.jpg">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0a09'/%3E%3Ccircle cx='23' cy='32' r='8' fill='%23ff6b1a'/%3E%3Ccircle cx='23' cy='32' r='13' fill='none' stroke='%23ff6b1a' stroke-opacity='.4'/%3E%3Cpath d='M31 32h11' stroke='%23ffb45e' stroke-width='2'/%3E%3Ccircle cx='46' cy='32' r='3.5' fill='%23ffb45e'/%3E%3C/svg%3E">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "KriSh",
+  "description": "Student, reader, tech enthusiast — just a thinker.",
+  "email": "mailto:krishnamdev127@gmail.com",
+  "telephone": "+91-9696025996",
+  "knowsAbout": ["History","Geography","Political Science","English","Hindi","Philosophy","Psychology","Literature"],
+  "sameAs": ["https://instagram.com/kr_ndv"]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -165,8 +194,6 @@ body.in-quote .dimmer{opacity:1}
   display:flex;align-items:center;gap:10px}
 .scroll-note i{width:6px;height:6px;border-radius:50%;background:var(--ember);animation:pulseDot 2s ease-in-out infinite}
 @keyframes pulseDot{0%,100%{opacity:.35}50%{opacity:1}}
-
-/* rotating scroll badge */
 .orbit-badge{position:absolute;right:7vw;bottom:9vh;width:118px;height:118px;z-index:6}
 .orbit-badge svg{width:100%;height:100%;overflow:visible;animation:spin 16s linear infinite;transition:fill .4s}
 .orbit-badge:hover svg{animation-play-state:paused}
@@ -201,24 +228,48 @@ h2.split .ch:hover{color:var(--amber)}
   border:1px solid var(--line);border-radius:999px;transition:.35s}
 .chips span:hover{border-color:rgba(255,107,26,.6);color:var(--amber);transform:translateY(-3px)}
 
-/* curiosities */
+/* ============ curiosities (accordion rows) ============ */
+.tap-hint{margin:-12px 0 26px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--faint)}
 .curiosities{border-top:1px solid var(--line)}
-.curiosities article{position:relative;display:grid;grid-template-columns:52px 190px 1fr;gap:18px;
-  align-items:center;padding:24px 10px;border-bottom:1px solid var(--line-soft)}
-.curiosities article::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .45s;
-  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,107,26,.1),transparent 70%);
-  pointer-events:none}
-.curiosities article:hover::before{opacity:1}
-.curiosities small{font-size:10px;letter-spacing:.2em;color:var(--ember)}
-.curiosities b{font:400 clamp(19px,2vw,25px)/1.1 var(--serif);
-  transition:transform .45s cubic-bezier(.22,1,.36,1),color .35s}
-.curiosities span{font-size:14px;color:var(--muted);transition:color .35s}
-.curiosities article:hover b{transform:translateX(10px);color:var(--amber)}
-.curiosities article:hover span{color:var(--body-c)}
-.curiosities article::after{content:attr(data-num);position:absolute;right:6px;top:50%;
-  transform:translateY(-50%) translateX(26px);font:italic 300 66px/1 var(--serif);
+.curio{position:relative;border-bottom:1px solid var(--line-soft)}
+.curio::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .45s;pointer-events:none;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,107,26,.1),transparent 70%)}
+.curio:hover::before{opacity:1}
+.curio::after{content:attr(data-num);position:absolute;right:6px;top:22px;
+  transform:translateX(26px);font:italic 300 66px/1 var(--serif);
   color:rgba(239,233,221,.07);opacity:0;transition:.55s cubic-bezier(.22,1,.36,1);pointer-events:none}
-.curiosities article:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+.curio:hover::after{opacity:1;transform:none}
+.curio-head{position:relative;display:grid;grid-template-columns:52px 190px 1fr 46px;gap:18px;align-items:center;
+  width:100%;padding:24px 10px;text-align:left}
+.curio-head small{font-size:10px;letter-spacing:.2em;color:var(--ember)}
+.curio-head b{font:400 clamp(19px,2vw,25px)/1.1 var(--serif);
+  transition:transform .45s cubic-bezier(.22,1,.36,1),color .35s}
+.curio-head span{font-size:14px;color:var(--muted);transition:color .35s}
+.curio:hover .curio-head b,.curio.open .curio-head b{transform:translateX(10px);color:var(--amber)}
+.curio:hover .curio-head span,.curio.open .curio-head span{color:var(--body-c)}
+.curio-x{position:relative;width:34px;height:34px;justify-self:end;border:1px solid var(--line);border-radius:50%;
+  transition:border-color .35s,background .35s}
+.curio-x::before,.curio-x::after{content:'';position:absolute;left:50%;top:50%;background:var(--body-c);
+  transition:transform .45s cubic-bezier(.77,0,.18,1),background .35s}
+.curio-x::before{width:12px;height:1px;transform:translate(-50%,-50%)}
+.curio-x::after{width:1px;height:12px;transform:translate(-50%,-50%)}
+.curio.open .curio-x{border-color:rgba(255,107,26,.6);background:rgba(255,107,26,.08)}
+.curio.open .curio-x::before{background:var(--amber)}
+.curio.open .curio-x::after{transform:translate(-50%,-50%) rotate(90deg);background:var(--amber)}
+.curio-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .65s cubic-bezier(.77,0,.18,1)}
+.curio.open .curio-body{grid-template-rows:1fr}
+.curio-inner{min-height:0;overflow:hidden}
+.curio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;
+  margin:2px 0 30px 70px;padding:6px 0 4px 26px;border-left:1px solid rgba(255,107,26,.35)}
+.curio-grid em{display:block;font:500 9px var(--grot);font-style:normal;letter-spacing:.26em;
+  color:var(--ember);margin-bottom:9px;text-transform:uppercase}
+.curio-grid p{font-size:14px;line-height:1.65;color:var(--muted)}
+.curio-grid>div{opacity:0;transform:translateY(12px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+.curio.open .curio-grid>div{opacity:1;transform:none}
+.curio.open .curio-grid>div:nth-child(1){transition-delay:.12s}
+.curio.open .curio-grid>div:nth-child(2){transition-delay:.2s}
+.curio.open .curio-grid>div:nth-child(3){transition-delay:.28s}
 
 /* quote (pinned, illuminated while scrolling) */
 .section--quote{min-height:100vh}
@@ -247,6 +298,14 @@ h2.split .ch:hover{color:var(--amber)}
   transition:transform .45s cubic-bezier(.22,1,.36,1)}
 .links a:hover .arrow{transform:translate(6px,-6px)}
 
+/* copy email */
+.copy-mail{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:11px 18px;
+  border:1px dashed rgba(239,233,221,.28);border-radius:999px;color:var(--muted);
+  font:500 11px var(--grot);letter-spacing:.08em;transition:.35s;text-align:left}
+.copy-mail:hover{border-color:rgba(255,107,26,.65);border-style:solid;color:var(--amber)}
+.copy-mail.done{border-style:solid;border-color:var(--ember);color:var(--amber);background:rgba(255,107,26,.08)}
+.copy-mail svg{flex:none}
+
 /* marquee */
 .marquee{position:relative;z-index:5;overflow:hidden;border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);padding:30px 0}
@@ -258,6 +317,36 @@ h2.split .ch:hover{color:var(--amber)}
 /* footer */
 footer{position:relative;z-index:5;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
   padding:26px 5vw 38px;color:var(--faint);font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+.f-clock b{color:var(--amber);font-weight:500}
+
+/* ============ toast ============ */
+.toast{position:fixed;left:50%;bottom:30px;z-index:96;transform:translate(-50%,16px);
+  display:flex;align-items:center;gap:10px;padding:13px 20px;max-width:88vw;
+  background:rgba(20,17,15,.94);border:1px solid rgba(239,233,221,.16);border-radius:999px;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  font:500 11px var(--grot);letter-spacing:.06em;color:var(--ink);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .45s,transform .45s cubic-bezier(.22,1,.36,1),visibility .45s}
+.toast i{width:6px;height:6px;border-radius:50%;background:var(--ember);
+  box-shadow:0 0 12px rgba(255,107,26,.8);flex:none}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+/* ============ cogito easter egg ============ */
+.cogito-flash{position:fixed;inset:0;z-index:95;display:grid;place-items:center;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,rgba(12,10,9,.45),rgba(12,10,9,.88));
+  opacity:0;transition:opacity .7s ease}
+.cogito-flash.show{opacity:1}
+.cogito-flash p{font:italic 340 clamp(30px,6vw,74px)/1.15 var(--serif);color:var(--ink);
+  text-align:center;padding:0 6vw}
+.cogito-flash .who{display:block;margin-top:16px;font:500 9px var(--grot);font-style:normal;
+  letter-spacing:.34em;color:var(--ember)}
+
+/* ============ idle dream whisper ============ */
+.dream-note{position:fixed;left:5vw;bottom:30px;z-index:60;display:flex;align-items:center;gap:10px;
+  font:500 9px var(--grot);letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  opacity:0;transform:translateY(6px);transition:opacity 1.4s ease,transform 1.4s ease;pointer-events:none}
+.dream-note i{width:5px;height:5px;border-radius:50%;background:var(--ember);animation:pulseDot 2s ease-in-out infinite}
+.dream-note.on{opacity:.9;transform:none}
 
 /* ============ responsive ============ */
 @media(max-width:900px){
@@ -270,17 +359,22 @@ footer{position:relative;z-index:5;display:flex;justify-content:space-between;ga
 }
 @media(max-width:600px){
   .actions{flex-direction:column;align-items:flex-start;gap:20px}
-  .curiosities article{grid-template-columns:34px 1fr;grid-template-rows:auto auto;gap:8px 16px;padding:20px 4px}
-  .curiosities b{grid-column:2}
-  .curiosities span{grid-column:2}
-  .curiosities article::after{display:none}
+  .curio-head{grid-template-columns:34px 1fr auto;grid-template-rows:auto auto;gap:8px 16px;padding:20px 4px}
+  .curio-head b{grid-column:2}
+  .curio-head span{grid-column:2}
+  .curio-x{grid-column:3;grid-row:1}
+  .curio-grid{grid-template-columns:1fr;margin-left:0;gap:18px}
+  .curio::after{display:none}
   .quote-wrap blockquote{font-size:27px}
   .section{padding-top:100px;padding-bottom:100px}
+  footer{flex-direction:column;gap:10px;align-items:center}
+  .dream-note{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .cursor-dot,.cursor-ring{display:none}
-  .e-dot,.brand-dot::after,.orbit-badge svg,.badge-arrow,.scroll-note i{animation:none!important}
+  .e-dot,.brand-dot::after,.orbit-badge svg,.badge-arrow,.scroll-note i,.dream-note i{animation:none!important}
+  .curio-body,.curio-grid>div{transition:none}
 }
 </style>
 </head>
@@ -392,10 +486,53 @@ footer{position:relative;z-index:5;display:flex;justify-content:space-between;ga
     </div>
     <div class="sec-body">
       <p class="copy reveal" style="margin-bottom:34px">A quick-fire list of things I've been digging into lately:</p>
+      <div class="tap-hint reveal">Click a row to unfold it</div>
       <div class="curiosities">
-        <article data-num="01"><small>01</small><b>Psychology</b><span>Understanding behavioral patterns.</span></article>
-        <article data-num="02"><small>02</small><b>Tech</b><span>Tracking the evolution of AI and digital ethics.</span></article>
-        <article data-num="03"><small>03</small><b>Geography</b><span>Studying how climate change reshapes modern borders.</span></article>
+        <article class="curio" data-num="01">
+          <button class="curio-head" aria-expanded="false" aria-controls="curio-b1">
+            <small>01</small><b>Psychology</b><span>Understanding behavioral patterns.</span>
+            <i class="curio-x" aria-hidden="true"></i>
+          </button>
+          <div class="curio-body" id="curio-b1">
+            <div class="curio-inner">
+              <div class="curio-grid">
+                <div><em>Reading</em><p>&ldquo;Thinking, Fast and Slow&rdquo;. Slowly — a few pages at a time, mostly on the bus.</p></div>
+                <div><em>Noticing</em><p>How people act in queues versus how they say they'd act. The gap is the interesting part.</p></div>
+                <div><em>Changed my mind</em><p>Personality isn't a fixed type. People are verbs, not nouns.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="curio" data-num="02">
+          <button class="curio-head" aria-expanded="false" aria-controls="curio-b2">
+            <small>02</small><b>Tech</b><span>Tracking the evolution of AI and digital ethics.</span>
+            <i class="curio-x" aria-hidden="true"></i>
+          </button>
+          <div class="curio-body" id="curio-b2">
+            <div class="curio-inner">
+              <div class="curio-grid">
+                <div><em>Tracking</em><p>How AI assistants quietly change the way my friends write — and think.</p></div>
+                <div><em>Sitting with</em><p>If a tool writes it for you, whose thought was it?</p></div>
+                <div><em>Reading</em><p>Essays on digital ethics. More essays, less news.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="curio" data-num="03">
+          <button class="curio-head" aria-expanded="false" aria-controls="curio-b3">
+            <small>03</small><b>Geography</b><span>Studying how climate change reshapes modern borders.</span>
+            <i class="curio-x" aria-hidden="true"></i>
+          </button>
+          <div class="curio-body" id="curio-b3">
+            <div class="curio-inner">
+              <div class="curio-grid">
+                <div><em>Reading</em><p>River disputes. Every border has a biography.</p></div>
+                <div><em>Watching</em><p>Coastlines redraw themselves on maps, decade by decade.</p></div>
+                <div><em>Changed my mind</em><p>Geography isn't about places. It's about decisions.</p></div>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
@@ -438,6 +575,10 @@ footer{position:relative;z-index:5;display:flex;justify-content:space-between;ga
           <span class="arrow">&#8599;</span>
         </a>
       </div>
+      <button class="copy-mail reveal" id="copyMail" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h8A2.5 2.5 0 0 1 15 4.5V5"/></svg>
+        <span id="copyLabel">Copy address — krishnamdev127@gmail.com</span>
+      </button>
     </div>
   </div>
 </section>
@@ -472,8 +613,16 @@ footer{position:relative;z-index:5;display:flex;justify-content:space-between;ga
 
 <footer>
   <span>KriSh — Synapse</span>
+  <span class="f-clock">IST <b id="clockTime">&middot;&middot;:&middot;&middot;:&middot;&middot;</b></span>
   <span>THINK, THEN MOVE.</span>
 </footer>
+
+<!-- floating UI -->
+<div class="toast" id="toast" role="status" aria-live="polite"><i></i><span id="toastMsg"></span></div>
+<div class="cogito-flash" id="cogitoFlash" aria-hidden="true">
+  <p>Cogito, ergo sum.<span class="who">YOU FOUND THE HIDDEN THOUGHT</span></p>
+</div>
+<div class="dream-note" id="dreamNote" aria-hidden="true"><i></i>the mind wanders — still thinking</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -541,6 +690,9 @@ const garble = t => [...t].map(c=>c===' '?' ':GLYPHS[Math.random()*GLYPHS.length
 /* ================= shared state ================= */
 let mouseX=0, mouseY=0, tx=innerWidth/2, ty=innerHeight/2;
 let targetScroll=0, scrollP=0;
+let quoteProgress=0;            // set by the quote ScrollTrigger, read by the network
+let idleMix=0, lastAct=performance.now();
+let brainAPI=null;              // assigned by the three.js block
 let mTween=null, mSpeed=1, mTarget=1;
 
 window.addEventListener('pointermove', e=>{
@@ -550,7 +702,6 @@ window.addEventListener('pointermove', e=>{
   cursorSeen();
 },{passive:true});
 
-/* progress bar */
 const progressBar=$('#progressBar'), progressHead=$('#progressHead');
 function onScroll(){
   const max = document.documentElement.scrollHeight - innerHeight;
@@ -577,7 +728,9 @@ if(fine && !reduced){
   document.addEventListener('pointerout',  e=>{ if(e.target.closest(HOV)) ring.classList.remove('is-hover'); });
 }
 
-/* ================= three.js — the living neural network ================= */
+/* ============================================================
+   THREE — the living neural network (section-reactive)
+   ============================================================ */
 let updateThree=null, threeResize=null;
 if(window.THREE){
   const renderer = new THREE.WebGLRenderer({canvas:$('#webgl'), antialias:true, alpha:true, powerPreference:'high-performance'});
@@ -589,26 +742,94 @@ if(window.THREE){
   const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, .1, 150);
   camera.position.set(0,0,7.6);
   const root = new THREE.Group(); scene.add(root);
-  const still  = reduced;               // reduced-motion: render, but nearly motionless
+  const still  = reduced;
   const mobile = innerWidth < 700;
 
-  /* --- neurons --- */
+  /* ---------- neurons: two target formations ---------- */
+  const CL = 8;
+  const SUBJECTS = ['History','Geography','Political Science','English','Hindi','Philosophy','Psychology','Literature'];
   const N = mobile ? 110 : 175;
-  const nPos=new Float32Array(N*3), nSize=new Float32Array(N), nPhase=new Float32Array(N), excite=new Float32Array(N);
+  const blobPos = new Float32Array(N*3);   // organic ellipsoid (default)
+  const cluPos  = new Float32Array(N*3);   // labelled subject clusters (mind map)
+  const curPos  = new Float32Array(N*3);   // live, morphed positions
+  const nSize = new Float32Array(N), nPhase = new Float32Array(N), excite = new Float32Array(N);
+  const clOf = new Uint8Array(N), isHub = new Uint8Array(N);
+  const centers = [];
+  for(let c=0;c<CL;c++){
+    const a = c/CL*Math.PI*2 + .4;
+    centers.push([Math.cos(a)*2.95, Math.sin(a*2)*.5, Math.sin(a)*1.8]);
+  }
   for(let i=0;i<N;i++){
     const r  = 4.05*Math.cbrt(Math.random()) + (Math.random()<.16 ? .85 : 0);
     const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1);
-    nPos[i*3]   = r*Math.sin(ph)*Math.cos(th)*1.42;   // organic ellipsoid, wider than tall
-    nPos[i*3+1] = r*Math.sin(ph)*Math.sin(th)*.98;
-    nPos[i*3+2] = r*Math.cos(ph)*1.12;
-    nSize[i]  = i%19===0 ? 7+Math.random()*3.5 : 2.2+Math.random()*2.6;  // a few hubs
+    blobPos[i*3]   = r*Math.sin(ph)*Math.cos(th)*1.42;
+    blobPos[i*3+1] = r*Math.sin(ph)*Math.sin(th)*.98;
+    blobPos[i*3+2] = r*Math.cos(ph)*1.12;
+
+    const c = i % CL; clOf[i] = c;
+    const hub = (i % 19 === 0); isHub[i] = hub ? 1 : 0;
+    const ce = centers[c];
+    if(hub){ cluPos[i*3]=ce[0]; cluPos[i*3+1]=ce[1]; cluPos[i*3+2]=ce[2]; }
+    else{
+      const rr = .16 + Math.pow(Math.random(),.55)*.55;
+      const t2 = Math.random()*Math.PI*2, p2 = Math.acos(2*Math.random()-1);
+      cluPos[i*3]   = ce[0] + rr*Math.sin(p2)*Math.cos(t2);
+      cluPos[i*3+1] = ce[1] + rr*Math.cos(p2)*.85;
+      cluPos[i*3+2] = ce[2] + rr*Math.sin(p2)*Math.sin(t2);
+    }
+    curPos[i*3]=blobPos[i*3]; curPos[i*3+1]=blobPos[i*3+1]; curPos[i*3+2]=blobPos[i*3+2];
+    nSize[i]  = hub ? 7+Math.random()*3.5 : 2.2+Math.random()*2.6;
     nPhase[i] = Math.random()*Math.PI*2;
   }
+
+  /* ---------- two connection graphs, cross-faded ---------- */
+  const allEdges = [];
+  const nbrB = Array.from({length:N},()=>[]);   // organic graph
+  const nbrC = Array.from({length:N},()=>[]);   // mind-map graph
+  const addEdge = (a,b,g)=>{ allEdges.push({a,b,g}); (g?nbrC:nbrB)[a].push(b); (g?nbrC:nbrB)[b].push(a); };
+  { // organic: proximity graph
+    const deg = new Uint8Array(N), ED2 = 1.68*1.68;
+    for(let i=0;i<N;i++) for(let j=i+1;j<N;j++){
+      if(deg[i]>=3 || deg[j]>=3) continue;
+      const dx=blobPos[i*3]-blobPos[j*3], dy=blobPos[i*3+1]-blobPos[j*3+1], dz=blobPos[i*3+2]-blobPos[j*3+2];
+      if(dx*dx+dy*dy+dz*dz < ED2){ addEdge(i,j,0); deg[i]++; deg[j]++; }
+    }
+  }
+  { // mind map: radiant hubs + local mesh + hub ring
+    const seen = new Set(), key=(a,b)=>a<b?a+'_'+b:b+'_'+a;
+    const hubOf = new Array(CL);
+    for(let c=0;c<CL;c++){
+      const members = [];
+      for(let i=0;i<N;i++) if(clOf[i]===c) members.push(i);
+      const hub = members.find(i=>isHub[i]) ?? members[0];
+      hubOf[c] = hub;
+      members.forEach(m=>{ if(m!==hub && !seen.has(key(m,hub))){ addEdge(m,hub,1); seen.add(key(m,hub)); } });
+      members.forEach(m=>{
+        if(m===hub) return;
+        const near = members.filter(o=>o!==m)
+          .map(o=>({o, d:(cluPos[o*3]-cluPos[m*3])**2 + (cluPos[o*3+1]-cluPos[m*3+1])**2 + (cluPos[o*3+2]-cluPos[m*3+2])**2}))
+          .sort((a,b)=>a.d-b.d);
+        for(let k=0;k<Math.min(2,near.length);k++){
+          const o=near[k].o;
+          if(!seen.has(key(m,o))){ addEdge(m,o,1); seen.add(key(m,o)); }
+        }
+      });
+    }
+    for(let c=0;c<CL;c++){
+      const a=hubOf[c], b=hubOf[(c+1)%CL];
+      if(!seen.has(key(a,b))) addEdge(a,b,1);
+    }
+  }
+  const ET = allEdges.length;
+  const ePos = new Float32Array(ET*6), eEx = new Float32Array(ET*2), eG = new Float32Array(ET*2);
+  allEdges.forEach((e,k)=>{ eG[k*2]=e.g; eG[k*2+1]=e.g; });
+
+  /* ---------- neuron points ---------- */
   const nGeo = new THREE.BufferGeometry();
-  nGeo.setAttribute('position', new THREE.BufferAttribute(nPos,3));
-  nGeo.setAttribute('aSize',    new THREE.BufferAttribute(nSize,1));
-  nGeo.setAttribute('aPhase',   new THREE.BufferAttribute(nPhase,1));
-  nGeo.setAttribute('aExcite',  new THREE.BufferAttribute(excite,1));
+  nGeo.setAttribute('position', new THREE.BufferAttribute(curPos,3).setUsage(THREE.DynamicDrawUsage));
+  nGeo.setAttribute('aSize',  new THREE.BufferAttribute(nSize,1));
+  nGeo.setAttribute('aPhase', new THREE.BufferAttribute(nPhase,1));
+  nGeo.setAttribute('aExcite',new THREE.BufferAttribute(excite,1).setUsage(THREE.DynamicDrawUsage));
   const nMat = new THREE.ShaderMaterial({
     transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
     uniforms:{ uTime:{value:0}, uPR:{value:DPR}, uImpulse:{value:new THREE.Vector3(0,0,999)} },
@@ -620,7 +841,7 @@ if(window.THREE){
         vec4 mv = modelViewMatrix * vec4(position,1.0);
         float pulse = .5 + .5*sin(uTime*1.35 + aPhase);
         float d = distance(position, uImpulse);
-        float prox = smoothstep(2.6, 0.0, d);          /* cursor stirs nearby neurons */
+        float prox = smoothstep(2.6, 0.0, d);
         float e = max(aExcite, prox*prox);
         vHot = e; vD = -mv.z;
         float dist = max(1.0, -mv.z);
@@ -637,85 +858,188 @@ if(window.THREE){
         gl_FragColor = vec4(col*(.5+vHot*1.25), core*fog*(.45+vHot*.55));
       }`
   });
-  root.add(new THREE.Points(nGeo, nMat));
+  const neurons = new THREE.Points(nGeo, nMat); neurons.frustumCulled=false; root.add(neurons);
 
-  /* --- synapses (edges) --- */
-  const edges=[], adj=Array.from({length:N},()=>[]);
-  const ED=1.68, MAXDEG=3;
-  for(let i=0;i<N;i++) for(let j=i+1;j<N;j++){
-    if(adj[i].length>=MAXDEG || adj[j].length>=MAXDEG) continue;
-    const dx=nPos[i*3]-nPos[j*3], dy=nPos[i*3+1]-nPos[j*3+1], dz=nPos[i*3+2]-nPos[j*3+2];
-    const d2=dx*dx+dy*dy+dz*dz;
-    if(d2<ED*ED){ edges.push({a:i,b:j,len:Math.sqrt(d2)}); adj[i].push(edges.length-1); adj[j].push(edges.length-1); }
-  }
-  const E=edges.length;
-  const ePos=new Float32Array(E*6), eEx=new Float32Array(E*2);
-  edges.forEach((e,k)=> ePos.set([nPos[e.a*3],nPos[e.a*3+1],nPos[e.a*3+2],nPos[e.b*3],nPos[e.b*3+1],nPos[e.b*3+2]], k*6));
+  /* ---------- synapses (edges, cross-fading graphs) ---------- */
   const eGeo = new THREE.BufferGeometry();
-  eGeo.setAttribute('position', new THREE.BufferAttribute(ePos,3));
-  eGeo.setAttribute('aE',       new THREE.BufferAttribute(eEx,1));
+  eGeo.setAttribute('position', new THREE.BufferAttribute(ePos,3).setUsage(THREE.DynamicDrawUsage));
+  eGeo.setAttribute('aE', new THREE.BufferAttribute(eEx,1).setUsage(THREE.DynamicDrawUsage));
+  eGeo.setAttribute('aG', new THREE.BufferAttribute(eG,1));
   const eMat = new THREE.ShaderMaterial({
     transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
-    vertexShader:`attribute float aE; varying float vE; varying float vD;
-      void main(){ vE=aE; vec4 mv=modelViewMatrix*vec4(position,1.0); vD=-mv.z; gl_Position=projectionMatrix*mv; }`,
-    fragmentShader:`varying float vE; varying float vD;
+    uniforms:{ uMix:{value:0} },
+    vertexShader:`attribute float aE; attribute float aG; uniform float uMix;
+      varying float vE; varying float vD; varying float vG;
+      void main(){
+        vE=aE; vG=mix(1.0-aG, aG, uMix);
+        vec4 mv=modelViewMatrix*vec4(position,1.0); vD=-mv.z;
+        gl_Position=projectionMatrix*mv;
+      }`,
+    fragmentShader:`varying float vE; varying float vD; varying float vG;
       void main(){
         float fog = smoothstep(16.0,5.0,vD);
         vec3 c = mix(vec3(.30,.26,.21), vec3(1.0,.45,.15), clamp(vE,0.0,1.0));
-        gl_FragColor = vec4(c, (.05+vE*.55)*fog);
+        gl_FragColor = vec4(c, (.05+vE*.55)*fog*vG);
       }`
   });
-  root.add(new THREE.LineSegments(eGeo, eMat));
+  const edgesMesh = new THREE.LineSegments(eGeo, eMat); edgesMesh.frustumCulled=false; root.add(edgesMesh);
 
-  /* --- travelling signals (thoughts firing) --- */
+  /* ---------- travelling signals ---------- */
   const MAXSIG = mobile ? 14 : 26;
+  const sigs = [];
   const sigPos = new Float32Array(MAXSIG*3).fill(999);
   const sigPh  = new Float32Array(MAXSIG);
+  const sigA   = new Float32Array(MAXSIG);
   for(let i=0;i<MAXSIG;i++) sigPh[i]=Math.random()*Math.PI*2;
   const sigGeo = new THREE.BufferGeometry();
-  sigGeo.setAttribute('position', new THREE.BufferAttribute(sigPos,3));
-  sigGeo.setAttribute('aPh',      new THREE.BufferAttribute(sigPh,1));
+  sigGeo.setAttribute('position', new THREE.BufferAttribute(sigPos,3).setUsage(THREE.DynamicDrawUsage));
+  sigGeo.setAttribute('aPh', new THREE.BufferAttribute(sigPh,1));
+  sigGeo.setAttribute('aA',  new THREE.BufferAttribute(sigA,1).setUsage(THREE.DynamicDrawUsage));
   const sigMat = new THREE.ShaderMaterial({
     transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
     uniforms:{ uTime:{value:0}, uPR:{value:DPR} },
-    vertexShader:`attribute float aPh; uniform float uTime; uniform float uPR; varying float vD;
+    vertexShader:`attribute float aPh; attribute float aA;
+      uniform float uTime; uniform float uPR; varying float vD; varying float vA;
       void main(){
-        vec4 mv = modelViewMatrix*vec4(position,1.0); vD = -mv.z;
-        float fl = .8 + .25*sin(uTime*17.0 + aPh);
-        gl_PointSize = min(48.0, uPR*fl*(50.0/max(1.0,-mv.z)));
-        gl_Position = projectionMatrix*mv;
+        vA=aA;
+        vec4 mv=modelViewMatrix*vec4(position,1.0); vD=-mv.z;
+        float fl=.8+.25*sin(uTime*17.0+aPh);
+        gl_PointSize=min(48.0,uPR*fl*(50.0/max(1.0,-mv.z)));
+        gl_Position=projectionMatrix*mv;
+      }`,
+    fragmentShader:`varying float vD; varying float vA;
+      void main(){
+        float d=length(gl_PointCoord-vec2(.5));
+        float core=smoothstep(.5,.04,d);
+        float fog=smoothstep(17.0,6.0,vD);
+        gl_FragColor=vec4(vec3(1.0,.6,.22)*1.35, core*fog*vA);
+      }`
+  });
+  const sigMesh = new THREE.Points(sigGeo, sigMat); sigMesh.frustumCulled=false; root.add(sigMesh);
+
+  /* ---------- the thinker: one bright signal synced to the quote ---------- */
+  const thPos = new Float32Array([0,0,999]);
+  const thGeo = new THREE.BufferGeometry();
+  thGeo.setAttribute('position', new THREE.BufferAttribute(thPos,3).setUsage(THREE.DynamicDrawUsage));
+  const thMat = new THREE.ShaderMaterial({
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+    uniforms:{ uTime:{value:0}, uPR:{value:DPR} },
+    vertexShader:`uniform float uTime; uniform float uPR; varying float vD;
+      void main(){
+        vec4 mv=modelViewMatrix*vec4(position,1.0); vD=-mv.z;
+        float fl=1.0+.2*sin(uTime*9.0);
+        gl_PointSize=min(90.0,uPR*fl*(66.0/max(1.0,-mv.z)));
+        gl_Position=projectionMatrix*mv;
       }`,
     fragmentShader:`varying float vD;
       void main(){
-        float d = length(gl_PointCoord - vec2(.5));
-        float core = smoothstep(.5,.04,d);
-        float fog  = smoothstep(17.0,6.0,vD);
-        gl_FragColor = vec4(vec3(1.0,.6,.22)*1.35, core*fog);
+        float d=length(gl_PointCoord-vec2(.5));
+        float core=smoothstep(.5,.02,d);
+        float fog=smoothstep(17.0,6.0,vD);
+        gl_FragColor=vec4(vec3(1.0,.62,.25)*1.5, core*fog);
       }`
   });
-  root.add(new THREE.Points(sigGeo, sigMat));
+  const thinker = new THREE.Points(thGeo, thMat); thinker.visible=false; thinker.frustumCulled=false; root.add(thinker);
 
-  const sigs = [];
-  const otherEnd = (ei,node)=> edges[ei].a===node ? edges[ei].b : edges[ei].a;
-  function fire(from){
-    if(sigs.length>=MAXSIG || !adj[from].length) return;
-    const ei = adj[from][Math.random()*adj[from].length|0];
-    sigs.push({from, to:otherEnd(ei,from), ei, t:0, dur:edges[ei].len/(2.3+Math.random()*1.6)});
+  /* ---------- 3D subject labels (mind map) ---------- */
+  const labels = [];
+  function buildLabels(){
+    SUBJECTS.forEach((name,c)=>{
+      const cv=document.createElement('canvas'), m=cv.getContext('2d');
+      const fs=54, pad=46;
+      m.font=`italic 500 ${fs}px Fraunces, Georgia, serif`;
+      cv.width=Math.ceil(m.measureText(name).width)+pad*2; cv.height=110;
+      const x=cv.getContext('2d');
+      x.font=`italic 500 ${fs}px Fraunces, Georgia, serif`;
+      x.textBaseline='middle'; x.fillStyle='rgba(239,233,221,.95)';
+      x.fillText(name,pad,58);
+      const tex=new THREE.CanvasTexture(cv);
+      tex.generateMipmaps=false; tex.minFilter=THREE.LinearFilter;
+      const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,opacity:0,depthWrite:false}));
+      const s=.34/110;
+      sp.scale.set(cv.width*s, cv.height*s, 1);
+      sp.position.set(centers[c][0], centers[c][1]+1.15, centers[c][2]);
+      sp.visible=false;
+      root.add(sp); labels.push(sp);
+    });
   }
-  function burstAt(local){
-    let best=0, bd=1e9;
+  let labelsBuilt=false;
+  const tryBuildLabels=()=>{ if(labelsBuilt) return; labelsBuilt=true; try{buildLabels()}catch(e){} };
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(tryBuildLabels);
+  setTimeout(tryBuildLabels, 3500);
+
+  /* ---------- state machine ---------- */
+  const STATE_DEFS = {
+    home:        {cluster:0, contract:0, spawn:1,   speed:1,    rot:1,   labels:0, reach:0, prop:.8 },
+    mind:        {cluster:1, contract:0, spawn:.7,  speed:.85,  rot:.45, labels:1, reach:0, prop:.75},
+    curiosities: {cluster:0, contract:0, spawn:3.4, speed:2.1,  rot:1.7, labels:0, reach:0, prop:.95},
+    remember:    {cluster:0, contract:0, spawn:0,   speed:.3,   rot:.12, labels:0, reach:0, prop:0  },
+    contact:     {cluster:0, contract:0, spawn:.8,  speed:1.15, rot:.8,  labels:0, reach:1, prop:.8 },
+    exit:        {cluster:0, contract:1, spawn:.22, speed:.55,  rot:.3,  labels:0, reach:0, prop:.5 },
+  };
+  const KEYS = Object.keys(STATE_DEFS.home);
+  const cur = {...STATE_DEFS.home}, tgt = {...STATE_DEFS.home};
+  let stateId = 'home';
+  function brainState(id){
+    if(!STATE_DEFS[id] || id===stateId) return;
+    const prev = stateId; stateId = id;
+    Object.assign(tgt, STATE_DEFS[id]);
+    if(prev==='exit' && id==='home') burst(12);   // the re-bloom on return
+  }
+
+  /* ---------- signals ---------- */
+  function len3(a,b){
+    const dx=curPos[a*3]-curPos[b*3], dy=curPos[a*3+1]-curPos[b*3+1], dz=curPos[a*3+2]-curPos[b*3+2];
+    return Math.sqrt(dx*dx+dy*dy+dz*dz)||.001;
+  }
+  function fire(from,g){
+    if(sigs.length>=MAXSIG) return;
+    const nbrs=(g?nbrC:nbrB)[from];
+    if(!nbrs.length) return;
+    const to=nbrs[Math.random()*nbrs.length|0];
+    sigs.push({from,to,t:0,g,dur:len3(from,to)/(2.3+Math.random()*1.6)});
+  }
+  function burst(n=5,from){
+    if(still) return;
+    from = from ?? (Math.random()*N|0);
+    excite[from]=1.35;
+    const g=cur.cluster>.5?1:0;
+    for(let i=0;i<Math.min(n,(g?nbrC:nbrB)[from].length);i++) fire(from,g);
+  }
+
+  /* ---------- cogito shockwave ---------- */
+  let wildT=0, wildDist=null, wildR=0;
+  function cogito(){
+    wildT=3.4;
+    const o=Math.random()*N|0;
+    wildDist=new Float32Array(N);
     for(let i=0;i<N;i++){
-      const dx=nPos[i*3]-local.x, dy=nPos[i*3+1]-local.y, dz=nPos[i*3+2]-local.z;
-      const d=dx*dx+dy*dy+dz*dz;
-      if(d<bd){ bd=d; best=i; }
+      const dx=blobPos[i*3]-blobPos[o*3], dy=blobPos[i*3+1]-blobPos[o*3+1], dz=blobPos[i*3+2]-blobPos[o*3+2];
+      wildDist[i]=Math.sqrt(dx*dx+dy*dy+dz*dz);
     }
-    if(bd>16) best = Math.random()*N|0;
-    excite[best]=1.4;
-    const n = Math.min(adj[best].length, 4);
-    for(let k=0;k<n;k++) fire(best);
   }
 
-  /* --- pointer: excite, drag-rotate, tap-to-fire --- */
+  /* ---------- long pathway for the quote ---------- */
+  let path=null;
+  for(let attempt=0; attempt<8 && !path; attempt++){
+    let c=Math.random()*N|0, prev=-1; const p=[c];
+    while(p.length<26){
+      const nb=nbrB[c].filter(n=>n!==prev);
+      if(!nb.length) break;
+      prev=c; c=nb[Math.random()*nb.length|0]; p.push(c);
+    }
+    if(p.length>=14) path=p;
+  }
+  if(!path && N>2) path=[0,1,2];
+
+  /* ---------- reach-out origin (contact) ---------- */
+  let centerN=0, cbd=1e9;
+  for(let i=0;i<N;i++){
+    const d=blobPos[i*3]**2+blobPos[i*3+1]**2+blobPos[i*3+2]**2;
+    if(d<cbd){ cbd=d; centerN=i; }
+  }
+
+  /* ---------- pointer: excite, drag-rotate, tap-to-fire ---------- */
   const ndc=new THREE.Vector2(), ray=new THREE.Raycaster();
   const plane=new THREE.Plane(new THREE.Vector3(0,0,1), 0);
   const impW=new THREE.Vector3(), impL=new THREE.Vector3();
@@ -736,6 +1060,18 @@ if(window.THREE){
       pxx=e.clientX; pyy=e.clientY;
     }
   },{passive:true});
+  function burstAtLocal(local){
+    let best=0, bbd=1e9;
+    for(let i=0;i<N;i++){
+      const dx=curPos[i*3]-local.x, dy=curPos[i*3+1]-local.y, dz=curPos[i*3+2]-local.z;
+      const d=dx*dx+dy*dy+dz*dz;
+      if(d<bbd){ bbd=d; best=i; }
+    }
+    if(bbd>16) best=Math.random()*N|0;
+    excite[best]=1.4;
+    const g=cur.cluster>.5?1:0;
+    for(let i=0;i<4;i++) fire(best,g);
+  }
   window.addEventListener('pointerdown', e=>{
     if(still || e.pointerType!=='mouse') return;
     if(e.target.closest('a,button,.nav,.menu,input,textarea')) return;
@@ -743,70 +1079,149 @@ if(window.THREE){
     e.preventDefault();
   });
   window.addEventListener('pointerup', ()=>{
-    if(dragging && !dragged && hasImp){ impL.copy(impW); root.worldToLocal(impL); burstAt(impL); }
+    if(dragging && !dragged && hasImp){ impL.copy(impW); root.worldToLocal(impL); burstAtLocal(impL); }
     dragging=false;
   });
-  window.addEventListener('click', e=>{          /* tap bursts on touch */
+  window.addEventListener('click', e=>{
     if(still || fine) return;
     if(e.target.closest('a,button,.nav,.menu,input,textarea')) return;
     ndc.set(e.clientX/innerWidth*2-1, -(e.clientY/innerHeight)*2+1);
     ray.setFromCamera(ndc, camera);
-    if(ray.ray.intersectPlane(plane, impW)){ impL.copy(impW); root.worldToLocal(impL); burstAt(impL); }
+    if(ray.ray.intersectPlane(plane, impW)){ impL.copy(impW); root.worldToLocal(impL); burstAtLocal(impL); }
   });
 
-  let spawnAcc=0;
+  /* ---------- per-frame update ---------- */
+  let spawnAcc=0, reachT=0, selfQ=0;
   updateThree = (t, dt)=>{
+    const k = 1 - Math.exp(-dt*2.4);
+    for(const key of KEYS) cur[key] += (tgt[key]-cur[key])*k;
+
     scrollP += (targetScroll-scrollP)*.06;
-    baseRot += dt*.045;
-    uRotX *= .997; uRotY *= .997;                 // slowly finds its way back
+    baseRot += dt*(still ? .006 : .045*cur.rot);
+    uRotX *= .997; uRotY *= .997;
     root.rotation.y = baseRot + uRotY;
     root.rotation.x = uRotX + mouseY*.05 + scrollP*.3;
     root.rotation.z = mouseX*-.02;
-    root.position.y = scrollP*1.55;               // descend deeper as you scroll
+    root.position.y = scrollP*1.55;
+    const sc = 1 - cur.contract*.62;
+    root.scale.set(sc,sc,sc);
     camera.position.x += (mouseX*.55 - camera.position.x)*.045;
     camera.position.y += (-mouseY*.3 - camera.position.y)*.045;
     camera.position.z  = 7.6 - scrollP*2.7;
     camera.lookAt(0,0,0);
 
     if(!still){
-      spawnAcc += dt;
-      if(spawnAcc>.13 && sigs.length<MAXSIG){ spawnAcc=0; fire(Math.random()*N|0); }
-      for(let k=sigs.length-1;k>=0;k--){
-        const s=sigs[k];
-        s.t += dt/s.dur;
+      const m = cur.cluster;
+
+      // morph neurons between formations
+      for(let i=0;i<N;i++){
+        const j=i*3, wob=Math.sin(t*.7+nPhase[i])*.05*(1-m);
+        curPos[j]  = blobPos[j]  +(cluPos[j]  -blobPos[j])  *m + wob;
+        curPos[j+1]= blobPos[j+1]+(cluPos[j+1]-blobPos[j+1])*m + wob*.6;
+        curPos[j+2]= blobPos[j+2]+(cluPos[j+2]-blobPos[j+2])*m;
+      }
+      nGeo.attributes.position.needsUpdate = true;
+
+      // rebuild edge endpoints from live positions
+      for(let q=0;q<ET;q++){
+        const e=allEdges[q], a=e.a*3, b=e.b*3, o=q*6;
+        ePos[o]=curPos[a];   ePos[o+1]=curPos[a+1]; ePos[o+2]=curPos[a+2];
+        ePos[o+3]=curPos[b]; ePos[o+4]=curPos[b+1]; ePos[o+5]=curPos[b+2];
+        eEx[q*2]=excite[e.a]; eEx[q*2+1]=excite[e.b];
+      }
+      eGeo.attributes.position.needsUpdate = true;
+      eGeo.attributes.aE.needsUpdate = true;
+      eMat.uniforms.uMix.value = m;
+
+      // idle dream blend (gentle wandering on top of any state)
+      const dSpawn = cur.spawn*(1-idleMix) + 2.1*idleMix;
+      const dSpeed = cur.speed*(1-idleMix) + .55*idleMix;
+
+      // cogito shockwave
+      let spawnBoost=0;
+      if(wildT>0){
+        wildT-=dt; spawnBoost=16;
+        wildR=(3.4-wildT)*7.5;
+        for(let i=0;i<N;i++){
+          const d=wildDist[i]-wildR;
+          if(d>-2.5 && d<2.5){ const w=Math.exp(-d*d*.5); if(w>excite[i]) excite[i]=w; }
+        }
+      }
+
+      // spawn
+      spawnAcc += dt*(dSpawn+spawnBoost)*7.7;
+      if(spawnAcc>=1){ spawnAcc=0; fire(Math.random()*N|0, m>.5?1:0); }
+
+      // advance signals
+      for(let q=sigs.length-1;q>=0;q--){
+        const s=sigs[q];
+        s.t += dt*dSpeed/s.dur;
         if(s.t>=1){
-          excite[s.to] = Math.min(1.4, excite[s.to]+.95);
-          const opts = adj[s.to].filter(ei=>otherEnd(ei,s.to)!==s.from);
-          if(opts.length && Math.random()<.8){     // the thought keeps propagating
-            const ei=opts[Math.random()*opts.length|0];
-            s.from=s.to; s.to=otherEnd(ei,s.from); s.ei=ei; s.t=0;
-            s.dur=edges[ei].len/(2.3+Math.random()*1.6);
-          } else sigs.splice(k,1);
+          excite[s.to]=Math.min(1.4, excite[s.to]+.95);
+          const nb=(s.g?nbrC:nbrB)[s.to].filter(n=>n!==s.from);
+          if(nb.length && Math.random()<cur.prop){
+            s.from=s.to; s.to=nb[Math.random()*nb.length|0]; s.t=0;
+            s.dur=len3(s.from,s.to)/(2.3+Math.random()*1.6);
+          } else sigs.splice(q,1);
         }
       }
       sigPos.fill(999);
-      for(let i=0;i<Math.min(sigs.length,MAXSIG);i++){
+      for(let i=0;i<sigs.length;i++){
         const s=sigs[i], a=s.from*3, b=s.to*3;
-        sigPos[i*3]   = nPos[a]  +(nPos[b]  -nPos[a])  *s.t;
-        sigPos[i*3+1] = nPos[a+1]+(nPos[b+1]-nPos[a+1])*s.t;
-        sigPos[i*3+2] = nPos[a+2]+(nPos[b+2]-nPos[a+2])*s.t;
+        sigPos[i*3]  =curPos[a]  +(curPos[b]  -curPos[a])  *s.t;
+        sigPos[i*3+1]=curPos[a+1]+(curPos[b+1]-curPos[a+1])*s.t;
+        sigPos[i*3+2]=curPos[a+2]+(curPos[b+2]-curPos[a+2])*s.t;
+        sigA[i]=s.g===0 ? (1-m) : m;
       }
       sigGeo.attributes.position.needsUpdate = true;
+      sigGeo.attributes.aA.needsUpdate = true;
+
+      // excite decay
       for(let i=0;i<N;i++) excite[i]=Math.max(0, excite[i]-dt*1.05);
       nGeo.attributes.aExcite.needsUpdate = true;
-      for(let k=0;k<E;k++){ const e=edges[k]; eEx[k*2]=excite[e.a]; eEx[k*2+1]=excite[e.b]; }
-      eGeo.attributes.aE.needsUpdate = true;
-      nMat.uniforms.uTime.value = t;
-      sigMat.uniforms.uTime.value = t;
+
+      // contact: pulses reaching out from the centre
+      if(cur.reach>.5){
+        reachT+=dt;
+        if(reachT>1.4){ reachT=0; excite[centerN]=1.3; for(let i=0;i<5;i++) fire(centerN,0); }
+      }
+
+      // remember: the single thought travelling the long pathway, synced to the quote
+      if(stateId==='remember' && path){
+        let q = quoteProgress;
+        if(!anim){ selfQ=(selfQ+dt*.06)%1; q=selfQ; }
+        q=Math.max(0, Math.min(1, q*1.18-.04));
+        const f=q*(path.length-1), i0=Math.min(path.length-2, Math.floor(f)), fr=f-i0;
+        const a=path[i0]*3, b=path[i0+1]*3;
+        thPos[0]=curPos[a]  +(curPos[b]  -curPos[a])  *fr;
+        thPos[1]=curPos[a+1]+(curPos[b+1]-curPos[a+1])*fr;
+        thPos[2]=curPos[a+2]+(curPos[b+2]-curPos[a+2])*fr;
+        thGeo.attributes.position.needsUpdate=true;
+        excite[path[i0]]  =Math.max(excite[path[i0]],  .85);
+        excite[path[i0+1]]=Math.max(excite[path[i0+1]],.5);
+        thinker.visible=true;
+      } else thinker.visible=false;
+      thMat.uniforms.uTime.value=t;
+      nMat.uniforms.uTime.value=t;
+      sigMat.uniforms.uTime.value=t;
+
+      // subject labels
+      for(let i=0;i<labels.length;i++){
+        labels[i].visible = cur.labels>.02;
+        if(labels[i].visible) labels[i].material.opacity = cur.labels*.95;
+      }
+
+      // cursor impulse
       if(hasImp){ impL.copy(impW); root.worldToLocal(impL); nMat.uniforms.uImpulse.value.copy(impL); }
     }
-    renderer.render(scene, camera);
+    renderer.render(scene,camera);
   };
   threeResize = ()=>{
     renderer.setSize(innerWidth, innerHeight);
     camera.aspect = innerWidth/innerHeight;
     camera.updateProjectionMatrix();
   };
+  brainAPI = { state:brainState, burst, cogito };
 }
 window.addEventListener('resize', ()=>{ threeResize && threeResize(); });
 
@@ -822,7 +1237,7 @@ if(anim){
 
   /* ---- hero split + per-char scroll physics ---- */
   const heroL1 = splitChars($('.hero-title .line:not(.outline)'));
-  const heroL2 = splitChars($('.hero-title .line'));
+  const heroL2 = splitChars($('.hero-title .line.outline'));
   const heroChars = [...heroL1, ...heroL2];
   gsap.set(heroChars, {yPercent:120});
   heroChars.forEach(c=>{
@@ -900,13 +1315,14 @@ if(anim){
   gsap.from('.curiosities article', {y:34, opacity:0, duration:.85, stagger:.12, ease:'power3.out',
     scrollTrigger:{trigger:'.curiosities', start:'top 88%'}});
 
-  /* ---- the quote: pinned, words illuminate as you scroll (a thought forming) ---- */
+  /* ---- the quote: pinned; words illuminate as one thought travels the network ---- */
   const qWords = splitWords($('#remember blockquote'));
   gsap.set(qWords, {opacity:.13});
   gsap.timeline({
     scrollTrigger:{
       trigger:'#remember', start:'top top', end:'+=115%', scrub:.55,
       pin:true, anticipatePin:1,
+      onUpdate(self){ quoteProgress = self.progress; },
       onToggle(self){ document.body.classList.toggle('in-quote', self.isActive); }
     }})
     .to(qWords, {opacity:1, stagger:.055, ease:'none', duration:1})
@@ -921,10 +1337,9 @@ if(anim){
   if(loader) loader.style.display='none';
   document.body.classList.remove('no-scroll');
 }
-/* safety: never let the loader trap the page */
 setTimeout(()=>{ if(loader && loader.style.display!=='none'){ loader.style.display='none'; document.body.classList.remove('no-scroll'); } }, 4500);
 
-/* ================= magnetic buttons (pure JS, gsap-independent) ================= */
+/* ================= magnetic buttons ================= */
 if(fine && !reduced){
   $$('.magnetic').forEach(btn=>{
     const label = $('.mag-label', btn);
@@ -945,13 +1360,95 @@ if(fine && !reduced){
   });
 }
 
-/* ================= curiosities spotlight ================= */
+/* ================= curiosities: accordion + spotlight ================= */
  $$('.curiosities article').forEach(a=>{
   a.addEventListener('pointermove', e=>{
     const r=a.getBoundingClientRect();
     a.style.setProperty('--mx', (e.clientX-r.left)+'px');
     a.style.setProperty('--my', (e.clientY-r.top)+'px');
   },{passive:true});
+});
+const curios = $$('.curio');
+curios.forEach(c=>{
+  const head = $('.curio-head', c);
+  head.addEventListener('click', ()=>{
+    const wasOpen = c.classList.contains('open');
+    curios.forEach(o=>{
+      o.classList.remove('open');
+      $('.curio-head', o).setAttribute('aria-expanded','false');
+    });
+    if(!wasOpen){
+      c.classList.add('open');
+      head.setAttribute('aria-expanded','true');
+      brainAPI && brainAPI.burst(6);        // opening a curiosity fires a thought
+    }
+  });
+});
+
+/* ================= toast + copy email ================= */
+const toast=$('#toast'), toastMsg=$('#toastMsg');
+let toastT;
+function showToast(msg){
+  if(!toast) return;
+  toastMsg.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>toast.classList.remove('show'), 2600);
+}
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); return true; }
+  catch(e){
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=t; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      const ok=document.execCommand('copy'); ta.remove(); return ok;
+    }catch(e2){ return false; }
+  }
+}
+const EMAIL='krishnamdev127@gmail.com';
+const copyBtn=$('#copyMail'), copyLabel=$('#copyLabel');
+const COPY_LABEL_TEXT = copyLabel ? copyLabel.textContent : '';
+let copyT;
+if(copyBtn){
+  copyBtn.addEventListener('click', async ()=>{
+    const ok = await copyText(EMAIL);
+    copyBtn.classList.add('done');
+    copyLabel.textContent = ok ? 'Copied' : 'Copy failed — select it manually';
+    showToast(ok ? 'Email copied — '+EMAIL : 'Couldn\u2019t auto-copy: '+EMAIL);
+    if(ok) brainAPI && brainAPI.burst(8);   // reaching out
+    clearTimeout(copyT);
+    copyT = setTimeout(()=>{ copyBtn.classList.remove('done'); copyLabel.textContent=COPY_LABEL_TEXT; }, 2200);
+  });
+}
+
+/* ================= live IST clock ================= */
+const clockTime=$('#clockTime');
+if(clockTime){
+  let fmt=null;
+  try{ fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}); }
+  catch(e){ fmt=null; }
+  const tick=()=>{
+    const d=new Date();
+    clockTime.textContent = fmt ? fmt.format(d) : d.toTimeString().slice(0,8);
+  };
+  tick(); setInterval(tick,1000);
+}
+
+/* ================= easter egg: type "cogito" ================= */
+let keyBuf='';
+document.addEventListener('keydown', e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+  const t=e.target;
+  if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+  if(e.key.length!==1) return;
+  keyBuf=(keyBuf+e.key.toLowerCase()).slice(-6);
+  if(keyBuf==='cogito'){
+    keyBuf='';
+    const f=$('#cogitoFlash');
+    if(f){ f.classList.add('show'); setTimeout(()=>f.classList.remove('show'),2400); }
+    brainAPI && brainAPI.cogito();
+  }
 });
 
 /* ================= navigation ================= */
@@ -976,7 +1473,7 @@ menuBtn && menuBtn.addEventListener('click', ()=>{
   document.body.classList.toggle('no-scroll', open);
 });
 
-/* active section highlighting */
+/* active section highlighting + network state */
 const navBtns=$$('.nav button');
 const secIds=['home','mind','curiosities','remember','contact','exit'];
 const secIO=new IntersectionObserver(es=>{
@@ -984,10 +1481,18 @@ const secIO=new IntersectionObserver(es=>{
     if(en.isIntersecting){
       const id=en.target.id;
       navBtns.forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+      brainAPI && brainAPI.state(id);
     }
   });
 },{rootMargin:'-42% 0px -52% 0px'});
 secIds.forEach(id=>{ const el=document.getElementById(id); if(el) secIO.observe(el); });
+
+/* ================= idle detection (dreaming) ================= */
+['pointermove','pointerdown','wheel','touchstart','scroll','keydown'].forEach(ev=>
+  window.addEventListener(ev, ()=>{ lastAct=performance.now(); }, {passive:true})
+);
+const dreamNote=$('#dreamNote');
+let dreamOn=false;
 
 /* ================= master loop ================= */
 let lastT=performance.now();
@@ -995,6 +1500,15 @@ let tiltX=0, tiltY=0;
 function loop(now){
   requestAnimationFrame(loop);
   const dt=Math.min(.05,(now-lastT)/1000); lastT=now;
+
+  // idle blend for the dream state
+  const idleTgt = (now-lastAct)>22000 ? 1 : 0;
+  idleMix += (idleTgt-idleMix)*(1-Math.exp(-dt*1.1));
+  if(dreamNote){
+    const on = idleMix>.55;
+    if(on!==dreamOn){ dreamOn=on; dreamNote.classList.toggle('on',on); }
+  }
+
   if(updateThree) updateThree(now/1000, dt);
   if(fine && !reduced){
     cx+=(tx-cx)*.5;  cy+=(ty-cy)*.5;

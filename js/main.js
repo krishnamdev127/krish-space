@@ -89,7 +89,7 @@ function resetNodeWorld(){
   if(canAnimate&&!reduced){
     gsap.to('.mind-sticky',{duration:.55,scale:1,rotation:0,x:0,y:0,ease:'power3.out'});
     gsap.to('.mind-copy',{duration:.45,opacity:1,x:0,ease:'power2.out'});
-    gsap.to('.node-label',{duration:.35,opacity:mp=>1,ease:'power2.out'});
+    gsap.to('.node-label',{duration:.35,opacity:1,ease:'power2.out'});
     gsap.to('.marker',{duration:.4,scale:1,opacity:1,ease:'power2.out'});
   }
 }

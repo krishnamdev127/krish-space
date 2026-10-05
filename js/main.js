@@ -41,6 +41,7 @@ resize();make();requestAnimationFrame(draw);
 
 const title=document.getElementById('title'),char=document.getElementById('character'),flash=document.getElementById('flash'),status=document.getElementById('status'),boot1=document.getElementById('boot1'),boot2=document.getElementById('boot2'),progress=document.getElementById('progress'),marks=document.querySelector('.marks');
 const charSvg=document.querySelector('.char-svg');
+const archive=document.getElementById('archive');
 const introSection=document.getElementById('intro');
 const mindSection=document.getElementById('mind');
 const gsapReady=typeof window.gsap!=='undefined';
@@ -115,12 +116,15 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  else if(p>.52)status.textContent='SYSTEM / DISINTEGRATING'
  else if(p>.25)status.textContent='SYSTEM / LISTENING';
  else status.textContent='SYSTEM / AWAKE';
+ if(archiveBridge>.05)status.textContent='SYSTEM / ARCHIVE';
  progress.style.width=(Math.min(1,y/(document.body.scrollHeight-vh))*100)+'%';
  const mp=Math.max(0,Math.min(1,(y-vh*1.9)/(vh*.85)));
  const mindDepth=Math.max(0,Math.min(1,(y-vh*2.05)/(vh*1.15)));
  const bridge=Math.max(0,Math.min(1,(y-vh*3.65)/(vh*.65)));
  const thoughtBridge=Math.max(0,Math.min(1,(y-vh*4.72)/(vh*.52)));
  const thoughtDepth=Math.max(0,Math.min(1,(y-vh*4.92)/(vh*.72)));
+ const archiveBridge=Math.max(0,Math.min(1,(y-vh*5.58)/(vh*.5)));
+ const archiveDepth=Math.max(0,Math.min(1,(y-vh*5.92)/(vh*.7)));
  if(canAnimate&&!reduced){
    gsap.set('.mind-copy',{x:-mindDepth*55,opacity:Math.min(1,mindDepth*1.5+.15)});
    gsap.set('.node-label',{scale:.86+mindDepth*.14});
@@ -133,6 +137,11 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
    gsap.set('.thought-copy',{y:thoughtBridge*24,opacity:Math.max(.05,thoughtBridge)});
    gsap.set('.thought-backdrop',{x:-30-thoughtBridge*90,opacity:.18+thoughtBridge*.82,scale:.94+thoughtBridge*.06});
    gsap.set('.thought-card',{y:40-thoughtBridge*40,opacity:Math.max(.05,thoughtBridge)});
+   gsap.set('#thoughts .thought-copy',{x:-archiveBridge*55,opacity:1-archiveBridge*.9});
+   gsap.set('#thoughts .thought-card',{x:archiveBridge*26,y:40-thoughtBridge*40-archiveBridge*35,opacity:Math.max(.05,thoughtBridge*(1-archiveBridge*.9))});
+   gsap.set('.thought-backdrop',{x:-30-thoughtBridge*90+archiveBridge*130,opacity:.18+thoughtBridge*.82-archiveBridge*.55,scale:.94+thoughtBridge*.06-archiveBridge*.04});
+   gsap.set('#archive .archive-inner',{y:55-archiveBridge*55,opacity:Math.max(.05,archiveBridge),scale:.97+archiveBridge*.03});
+   gsap.set('#archive',{background:'rgba(3,3,3,'+(.35+archiveBridge*.65)+')'});
  }
  document.querySelectorAll('.node-label').forEach((e,i)=>{const base=mp*(.55+i*.12);e.style.opacity=activeNode?(e.classList.contains('active')?String(Math.min(1,base+.3)):'0.22'):String(base);e.style.transform='translateY('+(10-mp*10)+'px)'});
  ['m1','m2','m3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.left=(15+i*34)+'%';el.style.top=(62-i*17)+'%';el.style.opacity=activeNode?'.35':String(mp)});

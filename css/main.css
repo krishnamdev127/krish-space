@@ -55,3 +55,14 @@ main{position:relative;z-index:5}
 .thought-card{transition:transform .5s,border-color .4s,background .5s}
 .thought-card:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.025),transparent 45%);opacity:.5}
 @media(max-width:800px){.thought-backdrop{font-size:34vw}.thought-copy{top:13vh}.thought-card{backdrop-filter:blur(14px)}}
+
+
+/* thoughts -> archive collapse */
+#archive{position:relative;overflow:hidden;background:rgba(3,3,3,.35);will-change:background}
+#archive:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(255,83,99,.08),transparent 24%,rgba(0,0,0,.5) 72%);opacity:.8}
+#archive:after{content:"ARCHIVE / 03";position:absolute;right:7vw;top:12vh;font:400 8px var(--mono);letter-spacing:.3em;color:rgba(255,83,99,.42);pointer-events:none}
+.archive-inner{position:relative;z-index:2;will-change:transform,opacity}
+.artifact{will-change:transform,color}
+.artifact:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,83,99,.5),transparent);transform:scaleX(0);transform-origin:center;transition:transform .5s}
+.artifact:hover:after{transform:scaleX(1)}
+@media(max-width:800px){#archive:after{right:6vw;top:10vh}.archive-inner{width:100%}}

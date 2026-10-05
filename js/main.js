@@ -69,8 +69,32 @@ setTimeout(()=>{document.body.classList.remove('lock');boot2.textContent='signal
 const transitionCopy=document.getElementById('transitionCopy');
 const mindPanel=document.getElementById('mindPanel'),panelNo=document.getElementById('panelNo'),panelTitle=document.getElementById('panelTitle'),panelText=document.getElementById('panelText'),panelClose=document.getElementById('panelClose');
 const nodeData={history:{no:'NODE / 01',title:'HISTORY',text:'The past is not a timeline here. It is a library of patterns, people, conflicts and ideas that keep resurfacing.'},technology:{no:'NODE / 02',title:'TECHNOLOGY',text:'Things built to extend thought: code, interfaces, systems, experiments and the strange space between human and machine.'},thought:{no:'NODE / 03',title:'THOUGHT',text:'Questions without a finish line. Fragments, philosophy, literature and the ideas that refuse to stay quiet.'}};
-document.querySelectorAll('.node-label').forEach(btn=>btn.addEventListener('click',()=>{const d=nodeData[btn.dataset.node];panelNo.textContent=d.no;panelTitle.textContent=d.title;panelText.textContent=d.text;mindPanel.classList.add('open');document.querySelectorAll('.node-label').forEach(x=>x.classList.remove('active'));btn.classList.add('active');status.textContent='SYSTEM / NODE '+btn.dataset.node.toUpperCase()}));
-panelClose.addEventListener('click',()=>{mindPanel.classList.remove('open');document.querySelectorAll('.node-label').forEach(x=>x.classList.remove('active'));status.textContent='SYSTEM / LISTENING'}));
+const nodeTheme={
+ history:{x:-90,y:18,scale:1.12,rot:-2,glow:.34},
+ technology:{x:70,y:-22,scale:1.08,rot:2,glow:.42},
+ thought:{x:0,y:45,scale:1.16,rot:0,glow:.28}
+};
+function activateNode(name){
+  const th=nodeTheme[name];
+  if(canAnimate&&!reduced){
+    gsap.killTweensOf('.mind-sticky');
+    gsap.to('.mind-sticky',{duration:.65,scale:th.scale,rotation:th.rot,x:th.x,y:th.y,ease:'power3.out'});
+    gsap.to('.mind-copy',{duration:.45,opacity:.45,x:-35,ease:'power2.out'});
+    gsap.to('.node-label:not(.active)',{duration:.35,opacity:.22,ease:'power2.out'});
+    gsap.to('.marker',{duration:.55,scale:1.8,opacity:.35,ease:'power2.out'});
+  }
+  status.textContent='SYSTEM / '+name.toUpperCase()+' SIGNAL';
+}
+function resetNodeWorld(){
+  if(canAnimate&&!reduced){
+    gsap.to('.mind-sticky',{duration:.55,scale:1,rotation:0,x:0,y:0,ease:'power3.out'});
+    gsap.to('.mind-copy',{duration:.45,opacity:1,x:0,ease:'power2.out'});
+    gsap.to('.node-label',{duration:.35,opacity:mp=>1,ease:'power2.out'});
+    gsap.to('.marker',{duration:.4,scale:1,opacity:1,ease:'power2.out'});
+  }
+}
+document.querySelectorAll('.node-label').forEach(btn=>btn.addEventListener('click',()=>{const d=nodeData[btn.dataset.node];panelNo.textContent=d.no;panelTitle.textContent=d.title;panelText.textContent=d.text;mindPanel.classList.add('open');document.querySelectorAll('.node-label').forEach(x=>x.classList.remove('active'));btn.classList.add('active');activateNode(btn.dataset.node)}));
+panelClose.addEventListener('click',()=>{mindPanel.classList.remove('open');document.querySelectorAll('.node-label').forEach(x=>x.classList.remove('active'));resetNodeWorld();status.textContent='SYSTEM / LISTENING'}));
 function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.85))); sceneProgress=p;
  const reveal=Math.max(0,Math.min(1,p/.22)),listen=Math.max(0,Math.min(1,(p-.18)/.38)),diss=Math.max(0,Math.min(1,(p-.52)/.38)),exit=Math.max(0,Math.min(1,(p-.78)/.22));
  title.style.transform='translateY('+(-p*34)+'px) scale('+(1-p*.28)+') skewX('+(diss*3)+'deg)';

@@ -73,3 +73,15 @@ main{position:relative;z-index:5}
 .artifact-live:hover .go{letter-spacing:.32em;color:var(--red2)}
 .artifact-locked{opacity:.52}
 .artifact-locked:hover{opacity:.8}
+
+
+/* archive -> finale shutdown */
+#archive{will-change:opacity,transform,filter}
+#archive .archive-inner{will-change:transform,opacity,filter}
+#finale{position:relative;overflow:hidden}
+#finale:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(255,83,99,.05),transparent 20%,rgba(0,0,0,.72) 78%);opacity:.7;mix-blend-mode:screen}
+#finale:after{content:"END /";position:absolute;left:7vw;top:12vh;font:400 8px var(--mono);letter-spacing:.3em;color:rgba(255,83,99,.38);pointer-events:none}
+.finale-inner{position:relative;z-index:2}
+.finale-word{will-change:transform,opacity,filter;text-shadow:0 0 80px rgba(194,31,50,.08)}
+#finale .eyebrow,#finale .finale-inner>p,#finale .finale-link,#finale .finale-meta{will-change:transform,opacity}
+@media(max-width:800px){#finale:after{left:6vw;top:10vh}.finale-word{text-shadow:0 0 50px rgba(194,31,50,.08)}}

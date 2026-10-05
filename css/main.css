@@ -66,3 +66,10 @@ main{position:relative;z-index:5}
 .artifact:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,83,99,.5),transparent);transform:scaleX(0);transform-origin:center;transition:transform .5s}
 .artifact:hover:after{transform:scaleX(1)}
 @media(max-width:800px){#archive:after{right:6vw;top:10vh}.archive-inner{width:100%}}
+
+
+.artifact-live{position:relative}
+.artifact-live .go{transition:letter-spacing .4s,color .4s}
+.artifact-live:hover .go{letter-spacing:.32em;color:var(--red2)}
+.artifact-locked{opacity:.52}
+.artifact-locked:hover{opacity:.8}

@@ -116,7 +116,7 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  else if(p>.52)status.textContent='SYSTEM / DISINTEGRATING'
  else if(p>.25)status.textContent='SYSTEM / LISTENING';
  else status.textContent='SYSTEM / AWAKE';
- if(archiveBridge>.05)status.textContent='SYSTEM / ARCHIVE';
+
  progress.style.width=(Math.min(1,y/(document.body.scrollHeight-vh))*100)+'%';
  const mp=Math.max(0,Math.min(1,(y-vh*1.9)/(vh*.85)));
  const mindDepth=Math.max(0,Math.min(1,(y-vh*2.05)/(vh*1.15)));
@@ -125,6 +125,7 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  const thoughtDepth=Math.max(0,Math.min(1,(y-vh*4.92)/(vh*.72)));
  const archiveBridge=Math.max(0,Math.min(1,(y-vh*5.58)/(vh*.5)));
  const archiveDepth=Math.max(0,Math.min(1,(y-vh*5.92)/(vh*.7)));
+ if(archiveBridge>.05)status.textContent=archiveDepth>.55?'SYSTEM / SHUTTING DOWN':'SYSTEM / ARCHIVE';
  if(canAnimate&&!reduced){
    gsap.set('.mind-copy',{x:-mindDepth*55,opacity:Math.min(1,mindDepth*1.5+.15)});
    gsap.set('.node-label',{scale:.86+mindDepth*.14});
@@ -161,6 +162,7 @@ if(canAnimate&&!reduced){
   gsap.to('.char-mark',{opacity:.98,duration:1.7,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.18});
   gsap.to('.portrait-ring',{rotation:360,duration:22,ease:'none',repeat:-1});
   gsap.to('.thought-card',{y:'-=5',duration:2.6,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.35});
+  gsap.to('.artifact-live',{x:6,duration:3.2,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.3});
 }
 
 if(!reduced){addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>80){const f=flash;f.style.transition='opacity .08s';f.style.opacity='.12';setTimeout(()=>f.style.opacity='0',80)}},{passive:true})}

@@ -118,9 +118,14 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  progress.style.width=(Math.min(1,y/(document.body.scrollHeight-vh))*100)+'%';
  const mp=Math.max(0,Math.min(1,(y-vh*1.9)/(vh*.85)));
  const mindDepth=Math.max(0,Math.min(1,(y-vh*2.05)/(vh*1.15)));
+ const bridge=Math.max(0,Math.min(1,(y-vh*3.65)/(vh*.65)));
  if(canAnimate&&!reduced){
    gsap.set('.mind-copy',{x:-mindDepth*55,opacity:Math.min(1,mindDepth*1.5+.15)});
    gsap.set('.node-label',{scale:.86+mindDepth*.14});
+   gsap.set('.mind-sticky',{filter:'brightness('+(1-bridge*.55)+')'});
+   gsap.set('.identity-inner',{y:bridge*35,opacity:Math.max(.15,bridge)});
+   gsap.set('.portrait-core',{scale:1+bridge*.16,rotation:-8+bridge*4});
+   gsap.set('.portrait-ring',{scale:1+bridge*.08,opacity:1-bridge*.35});
  }
  document.querySelectorAll('.node-label').forEach((e,i)=>{const base=mp*(.55+i*.12);e.style.opacity=activeNode?(e.classList.contains('active')?String(Math.min(1,base+.3)):'0.22'):String(base);e.style.transform='translateY('+(10-mp*10)+'px)'});
  ['m1','m2','m3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.left=(15+i*34)+'%';el.style.top=(62-i*17)+'%';el.style.opacity=activeNode?'.35':String(mp)});

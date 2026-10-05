@@ -19,6 +19,28 @@ addEventListener('resize',()=>{resize();make()});addEventListener('pointermove',
 resize();make();requestAnimationFrame(draw);
 
 const title=document.getElementById('title'),char=document.getElementById('character'),flash=document.getElementById('flash'),status=document.getElementById('status'),boot1=document.getElementById('boot1'),boot2=document.getElementById('boot2'),progress=document.getElementById('progress'),marks=document.querySelector('.marks');
+const gsapReady=typeof window.gsap!=='undefined';
+if(gsapReady&&!reduced){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.set(['.kicker','.boot','.enter'],{opacity:0,y:14});
+  gsap.set('.title',{opacity:0,y:24,scale:.96});
+  gsap.set('.character',{opacity:0,y:28,scale:.985});
+  const introTl=gsap.timeline({delay:.35});
+  introTl.to('.kicker',{opacity:1,y:0,duration:.7,ease:'power3.out'})
+    .to('.character',{opacity:1,y:0,scale:1,duration:1.2,ease:'power3.out'},'-=.35')
+    .to('.title',{opacity:1,y:0,scale:1,duration:1.05,ease:'power4.out'},'-=.7')
+    .to('.boot',{opacity:1,y:0,duration:.6,ease:'power2.out'},'-=.65')
+    .to('.enter',{opacity:1,y:0,duration:.7,ease:'power3.out'},'-=.35');
+  gsap.utils.toArray('.identity-copy > *, .identity-portrait > *, .thought-copy > *, .thought-card, .artifact').forEach((el)=>{
+    gsap.from(el,{opacity:0,y:35,duration:.8,ease:'power3.out',scrollTrigger:{
+      trigger:el,start:'top 82%',once:true
+    }});
+  });
+  gsap.from('.finale-word',{opacity:0,y:45,scale:.94,duration:1.2,ease:'power4.out',scrollTrigger:{
+    trigger:'#finale',start:'top 65%',once:true
+  }});
+}
+
 setTimeout(()=>{document.body.classList.remove('lock');boot2.textContent='signal acquired';status.textContent='SYSTEM AWAKE'},1100);
 const transitionCopy=document.getElementById('transitionCopy');
 const mindPanel=document.getElementById('mindPanel'),panelNo=document.getElementById('panelNo'),panelTitle=document.getElementById('panelTitle'),panelText=document.getElementById('panelText'),panelClose=document.getElementById('panelClose');

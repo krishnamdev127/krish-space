@@ -15,10 +15,10 @@ function draw(){t+=.008;scrollY+=(targetScroll-scrollY)*.075;ctx.clearRect(0,0,w
  // active mind paths
  if(mind>.05){for(let k=0;k<5;k++){const ang=t*(.35+k*.07)+k*1.25,rx=w*.43,ry=h*.38,x=cx+Math.cos(ang)*rx,y=cy+Math.sin(ang)*ry;ctx.strokeStyle='rgba(255,83,99,.35)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.stroke()}}
  requestAnimationFrame(draw)}
-addEventListener('resize',()=>{resize();make()});addEventListener('pointermove',e=>{mouseX=e.clientX/w;mouseY=e.clientY/h});addEventListener('scroll',()=>targetScroll=scrollY,{passive:true});
+addEventListener('resize',()=>{resize();make()});addEventListener('pointermove',e=>{mouseX=e.clientX/w;mouseY=e.clientY/h;const eyes=document.getElementById('eyes');if(eyes&&!reduced){const rx=(mouseX-.5)*7,ry=(mouseY-.5)*4;eyes.style.transform='translate('+rx+'px,'+ry+'px)'}});addEventListener('scroll',()=>targetScroll=scrollY,{passive:true});
 resize();make();requestAnimationFrame(draw);
 
-const title=document.getElementById('title'),char=document.getElementById('character'),flash=document.getElementById('flash'),status=document.getElementById('status'),boot1=document.getElementById('boot1'),boot2=document.getElementById('boot2'),progress=document.getElementById('progress');
+const title=document.getElementById('title'),char=document.getElementById('character'),flash=document.getElementById('flash'),status=document.getElementById('status'),boot1=document.getElementById('boot1'),boot2=document.getElementById('boot2'),progress=document.getElementById('progress'),marks=document.querySelector('.marks');
 setTimeout(()=>{document.body.classList.remove('lock');boot2.textContent='signal acquired';status.textContent='SYSTEM AWAKE'},1100);
 const transitionCopy=document.getElementById('transitionCopy');
 const mindPanel=document.getElementById('mindPanel'),panelNo=document.getElementById('panelNo'),panelTitle=document.getElementById('panelTitle'),panelText=document.getElementById('panelText'),panelClose=document.getElementById('panelClose');
@@ -29,7 +29,7 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  const reveal=Math.max(0,Math.min(1,p/.22)),listen=Math.max(0,Math.min(1,(p-.18)/.38)),diss=Math.max(0,Math.min(1,(p-.52)/.38)),exit=Math.max(0,Math.min(1,(p-.78)/.22));
  title.style.transform='translateY('+(-p*34)+'px) scale('+(1-p*.28)+') skewX('+(diss*3)+'deg)';
  title.style.opacity=String(1-p*.82);
- char.classList.toggle('dissolve',diss>.05);
+ char.classList.toggle('dissolve',diss>.05);if(marks)marks.style.opacity=String(.55+diss*.45);
  char.style.transform='translateY('+(-p*72-diss*28)+'px) scale('+(1+p*.07+diss*.12)+') rotate('+(diss*2.5)+'deg)';
  char.style.opacity=String(1-diss);
  char.style.filter='drop-shadow(0 0 '+(60+diss*90)+'px rgba(194,31,50,'+(.08+diss*.2)+'))';

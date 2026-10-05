@@ -1,7 +1,8 @@
 (() => {
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canAnimate=typeof window.gsap!=='undefined';
 const canvas=document.getElementById('fx'),ctx=canvas.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2);
-let w=innerWidth,h=innerHeight,scrollY=0,targetScroll=0,mouseX=.5,mouseY=.5,t=0,burst=0;
+let w=innerWidth,h=innerHeight,scrollY=0,targetScroll=0,mouseX=.5,mouseY=.5,t=0,burst=0,sceneProgress=0;
 const N=420, pts=[];
 function resize(){w=innerWidth;h=innerHeight;canvas.width=w*DPR;canvas.height=h*DPR;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0)}
 function make(){pts.length=0;for(let i=0;i<N;i++){const a=Math.random()*Math.PI*2,r=Math.pow(Math.random(),.55),rr=Math.min(w,h)*(.08+.48*r);pts.push({a,r,rr,x:0,y:0,v:(Math.random()-.5)*.18,s:.4+Math.random()*1.5,phase:Math.random()*6.28,life:Math.random()})}}
@@ -19,6 +20,9 @@ addEventListener('resize',()=>{resize();make()});addEventListener('pointermove',
 resize();make();requestAnimationFrame(draw);
 
 const title=document.getElementById('title'),char=document.getElementById('character'),flash=document.getElementById('flash'),status=document.getElementById('status'),boot1=document.getElementById('boot1'),boot2=document.getElementById('boot2'),progress=document.getElementById('progress'),marks=document.querySelector('.marks');
+const charSvg=document.querySelector('.char-svg');
+const introSection=document.getElementById('intro');
+const mindSection=document.getElementById('mind');
 const gsapReady=typeof window.gsap!=='undefined';
 if(gsapReady&&!reduced){
   gsap.registerPlugin(ScrollTrigger);
@@ -47,12 +51,17 @@ const mindPanel=document.getElementById('mindPanel'),panelNo=document.getElement
 const nodeData={history:{no:'NODE / 01',title:'HISTORY',text:'The past is not a timeline here. It is a library of patterns, people, conflicts and ideas that keep resurfacing.'},technology:{no:'NODE / 02',title:'TECHNOLOGY',text:'Things built to extend thought: code, interfaces, systems, experiments and the strange space between human and machine.'},thought:{no:'NODE / 03',title:'THOUGHT',text:'Questions without a finish line. Fragments, philosophy, literature and the ideas that refuse to stay quiet.'}};
 document.querySelectorAll('.node-label').forEach(btn=>btn.addEventListener('click',()=>{const d=nodeData[btn.dataset.node];panelNo.textContent=d.no;panelTitle.textContent=d.title;panelText.textContent=d.text;mindPanel.classList.add('open');document.querySelectorAll('.node-label').forEach(x=>x.classList.remove('active'));btn.classList.add('active');status.textContent='SYSTEM / NODE '+btn.dataset.node.toUpperCase()}));
 panelClose.addEventListener('click',()=>{mindPanel.classList.remove('open');document.querySelectorAll('.node-label').forEach(x=>x.classList.remove('active'));status.textContent='SYSTEM / LISTENING'}));
-function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.85)));
+function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.85))); sceneProgress=p;
  const reveal=Math.max(0,Math.min(1,p/.22)),listen=Math.max(0,Math.min(1,(p-.18)/.38)),diss=Math.max(0,Math.min(1,(p-.52)/.38)),exit=Math.max(0,Math.min(1,(p-.78)/.22));
  title.style.transform='translateY('+(-p*34)+'px) scale('+(1-p*.28)+') skewX('+(diss*3)+'deg)';
  title.style.opacity=String(1-p*.82);
  char.classList.toggle('dissolve',diss>.05);if(marks)marks.style.opacity=String(.55+diss*.45);
- char.style.transform='translateY('+(-p*72-diss*28)+'px) scale('+(1+p*.07+diss*.12)+') rotate('+(diss*2.5)+'deg)';
+ if(!reduced&&canAnimate){
+  gsap.set(char,{y:-p*72-diss*28,scale:1+p*.07+diss*.12,rotation:diss*2.5});
+  gsap.set(charSvg,{rotationY:(mouseX-.5)*-8,rotationX:(mouseY-.5)*5,transformPerspective:900,transformOrigin:'50% 70%'});
+}else{
+  char.style.transform='translateY('+(-p*72-diss*28)+'px) scale('+(1+p*.07+diss*.12)+') rotate('+(diss*2.5)+'deg)';
+}
  char.style.opacity=String(1-diss);
  char.style.filter='drop-shadow(0 0 '+(60+diss*90)+'px rgba(194,31,50,'+(.08+diss*.2)+'))';
  transitionCopy.style.opacity=String(diss*(1-exit));
@@ -66,6 +75,13 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  document.querySelectorAll('.node-label').forEach((e,i)=>{e.style.opacity=String(mp*(.55+i*.12));e.style.transform='translateY('+(10-mp*10)+'px)'});
  ['m1','m2','m3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.left=(15+i*34)+'%';el.style.top=(62-i*17)+'%';el.style.opacity=mp});
  requestAnimationFrame(frame)}frame();
+
+if(canAnimate&&!reduced){
+  gsap.to('.character',{filter:'drop-shadow(0 0 70px rgba(194,31,50,.12))',duration:2.8,ease:'sine.inOut',repeat:-1,yoyo:true});
+  gsap.to('.char-mark',{opacity:.98,duration:1.7,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.18});
+  gsap.to('.portrait-ring',{rotation:360,duration:22,ease:'none',repeat:-1});
+  gsap.to('.thought-card',{y:'-=5',duration:2.6,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.35});
+}
 
 if(!reduced){addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>80){const f=flash;f.style.transition='opacity .08s';f.style.opacity='.12';setTimeout(()=>f.style.opacity='0',80)}},{passive:true})}
 })();

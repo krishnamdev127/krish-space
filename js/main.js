@@ -2,8 +2,8 @@
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canAnimate=typeof window.gsap!=='undefined';
 const canvas=document.getElementById('fx'),ctx=canvas.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2);
-let w=innerWidth,h=innerHeight,scrollY=0,targetScroll=0,mouseX=.5,mouseY=.5,t=0,burst=0,sceneProgress=0,disintegration=0,finaleProgress=0,activeNode='';
-const N=420, pts=[];
+let w=innerWidth,h=innerHeight,scrollY=0,targetScroll=0,mouseX=.5,mouseY=.5,t=0,sceneProgress=0,disintegration=0,finaleProgress=0,activeNode='',lastSceneKey='';
+const N=300, pts=[];
 function resize(){w=innerWidth;h=innerHeight;canvas.width=w*DPR;canvas.height=h*DPR;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0)}
 function make(){pts.length=0;for(let i=0;i<N;i++){const a=Math.random()*Math.PI*2,r=Math.pow(Math.random(),.55),rr=Math.min(w,h)*(.08+.48*r);pts.push({a,r,rr,x:0,y:0,v:(Math.random()-.5)*.18,s:.4+Math.random()*1.5,phase:Math.random()*6.28,life:Math.random()})}}
 function draw(){t+=.008;scrollY+=(targetScroll-scrollY)*.075;ctx.clearRect(0,0,w,h);
@@ -21,7 +21,7 @@ function draw(){t+=.008;scrollY+=(targetScroll-scrollY)*.075;ctx.clearRect(0,0,w
  // active mind paths
  if(mind>.05){
   const depth=mind;
-  for(let k=0;k<8;k++){
+  for(let k=0;k<6;k++){
     const ang=t*(.18+k*.025)+k*.78,rx=w*(.22+.035*k)+depth*w*.16,ry=h*(.16+.028*k)+depth*h*.12;
     const x=cx+Math.cos(ang)*rx,y=cy+Math.sin(ang)*ry;
     const alpha=(.12+depth*.16)*(1-k*.06);
@@ -29,7 +29,7 @@ function draw(){t+=.008;scrollY+=(targetScroll-scrollY)*.075;ctx.clearRect(0,0,w
     ctx.beginPath();ctx.moveTo(cx+(x-cx)*.18,cy+(y-cy)*.18);ctx.lineTo(x,y);ctx.stroke();
     if(k%2===0){ctx.beginPath();ctx.arc(x,y,3+depth*3,0,Math.PI*2);ctx.stroke()}
   }
-  for(let z=0;z<4;z++){
+  for(let z=0;z<3;z++){
     const phase=t*.45+z*1.7;
     const zx=cx+Math.cos(phase)*w*(.12+depth*.3),zy=cy+Math.sin(phase*1.13)*h*(.1+depth*.24);
     ctx.fillStyle='rgba(255,83,99,'+(.22+depth*.18)+')';ctx.beginPath();ctx.arc(zx,zy,1.4+depth*2,0,Math.PI*2);ctx.fill();
@@ -138,7 +138,8 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
  finaleProgress=shutdown;
  if(archiveBridge>.05 && shutdown<.45)status.textContent=archiveDepth>.55?'SYSTEM / SHUTTING DOWN':'SYSTEM / ARCHIVE';
  if(shutdown>=.45)status.textContent=shutdown>.82?'':'SYSTEM / OFFLINE';
- if(canAnimate&&!reduced){
+ const sceneKey=[mindDepth,bridge,thoughtBridge,archiveBridge,archiveDepth,shutdown,finaleReveal,activeNode].map(v=>typeof v==='number'?Math.round(v*200)/200:v).join('|');
+ if(canAnimate&&!reduced&&sceneKey!==lastSceneKey){
    gsap.set('.mind-copy',{x:-mindDepth*55,opacity:activeNode?Math.min(.45,mindDepth*1.5+.15):Math.min(1,mindDepth*1.5+.15)});
    gsap.set('.node-label',{scale:.86+mindDepth*.14});
    gsap.set('.mind-sticky',{filter:'brightness('+(1-bridge*.55)+')'});
@@ -166,6 +167,7 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
    gsap.set('#finale .finale-link',{opacity:Math.max(0,finaleReveal-.42)*1.7,y:18-finaleReveal*18});
    gsap.set('#finale .finale-meta',{opacity:Math.max(0,finaleReveal-.58)*2});
    gsap.set('#finale',{background:'radial-gradient(circle at 50% '+(45-shutdown*8)+'%,rgba(194,31,50,'+(.12*(1-shutdown*.85))+'),transparent 38%),rgba(3,3,3,'+(.7+shutdown*.3)+')'});
+   lastSceneKey=sceneKey;
  }
  document.querySelectorAll('.node-label').forEach((e,i)=>{const base=mp*(.55+i*.12);e.style.opacity=activeNode?(e.classList.contains('active')?String(Math.min(1,base+.3)):'0.22'):String(base);e.style.transform='translateY('+(10-mp*10)+'px)'});
  ['m1','m2','m3'].forEach((id,i)=>{const el=document.getElementById(id);el.style.left=(15+i*34)+'%';el.style.top=(62-i*17)+'%';el.style.opacity=activeNode?'.35':String(mp)});

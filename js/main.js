@@ -2,14 +2,19 @@
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canAnimate=typeof window.gsap!=='undefined';
 const canvas=document.getElementById('fx'),ctx=canvas.getContext('2d'),DPR=Math.min(devicePixelRatio||1,2);
-let w=innerWidth,h=innerHeight,scrollY=0,targetScroll=0,mouseX=.5,mouseY=.5,t=0,burst=0,sceneProgress=0;
+let w=innerWidth,h=innerHeight,scrollY=0,targetScroll=0,mouseX=.5,mouseY=.5,t=0,burst=0,sceneProgress=0,disintegration=0;
 const N=420, pts=[];
 function resize(){w=innerWidth;h=innerHeight;canvas.width=w*DPR;canvas.height=h*DPR;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0)}
 function make(){pts.length=0;for(let i=0;i<N;i++){const a=Math.random()*Math.PI*2,r=Math.pow(Math.random(),.55),rr=Math.min(w,h)*(.08+.48*r);pts.push({a,r,rr,x:0,y:0,v:(Math.random()-.5)*.18,s:.4+Math.random()*1.5,phase:Math.random()*6.28,life:Math.random()})}}
 function draw(){t+=.008;scrollY+=(targetScroll-scrollY)*.075;ctx.clearRect(0,0,w,h);
- const intro=Math.max(0,Math.min(1,scrollY/(innerHeight*1.55))), mind=Math.max(0,Math.min(1,(scrollY-innerHeight*1.65)/(innerHeight*.9))); const dissolve=Math.max(0,Math.min(1,(intro-.42)/.48));
+ const intro=Math.max(0,Math.min(1,scrollY/(innerHeight*1.55))), mind=Math.max(0,Math.min(1,(scrollY-innerHeight*1.65)/(innerHeight*.9))); const dissolve=Math.max(0,Math.min(1,(intro-.42)/.48)); disintegration=dissolve;
  const cx=w*(.57+(.5-mouseX)*.035),cy=h*(.51+(.5-mouseY)*.03);
- for(let i=0;i<N;i++){let p=pts[i],ang=p.a+t*p.v*(1-intro)+p.phase*.0001,rad=p.rr*(1-intro*.88)+Math.sin(t*2+p.phase)*12*intro;p.x=cx+Math.cos(ang)*rad;p.y=cy+Math.sin(ang)*rad*.72;
+ for(let i=0;i<N;i++){let p=pts[i],ang=p.a+t*p.v*(1-intro)+p.phase*.0001,baseRad=p.rr*(1-intro*.88)+Math.sin(t*2+p.phase)*12*intro;
+   const fragmentAngle=p.a+Math.sin(p.phase*3)*.18;
+   const fragmentRadius=disintegration*disintegration*(Math.min(w,h)*(.18+.52*p.r));
+   rad=baseRad+fragmentRadius;
+   p.x=cx+Math.cos(ang)*rad+Math.cos(fragmentAngle)*fragmentRadius*.42;
+   p.y=cy+Math.sin(ang)*rad*.72+Math.sin(fragmentAngle)*fragmentRadius*.32;
    if(intro>.22){const j=i%9===0?i:((i*37)%N),q=pts[j];if(j!==i){const dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy);if(d<105){ctx.strokeStyle='rgba(194,31,50,'+((1-d/105)*.22*intro)+')';ctx.lineWidth=.55;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}}
    const a=.12+intro*.42+(mind*.3);ctx.fillStyle=i%17===0?'rgba(255,83,99,'+a+')':'rgba(238,234,227,'+(a*.65)+')';ctx.beginPath();ctx.arc(p.x,p.y,(i%17===0?1.8:1)*p.s,0,Math.PI*2);ctx.fill();
  }
@@ -78,6 +83,9 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
 
 if(canAnimate&&!reduced){
   gsap.to('.character',{filter:'drop-shadow(0 0 70px rgba(194,31,50,.12))',duration:2.8,ease:'sine.inOut',repeat:-1,yoyo:true});
+  gsap.to('.character',{x:'+=5',duration:1.8,ease:'sine.inOut',repeat:-1,yoyo:true});
+  gsap.to('.flash',{opacity:0,duration:1,repeat:-1,yoyo:true,repeatDelay:8,ease:'sine.inOut'});
+
   gsap.to('.char-mark',{opacity:.98,duration:1.7,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.18});
   gsap.to('.portrait-ring',{rotation:360,duration:22,ease:'none',repeat:-1});
   gsap.to('.thought-card',{y:'-=5',duration:2.6,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.35});

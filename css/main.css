@@ -85,3 +85,13 @@ main{position:relative;z-index:5}
 .finale-word{will-change:transform,opacity,filter;text-shadow:0 0 80px rgba(194,31,50,.08)}
 #finale .eyebrow,#finale .finale-inner>p,#finale .finale-link,#finale .finale-meta{will-change:transform,opacity}
 @media(max-width:800px){#finale:after{left:6vw;top:10vh}.finale-word{text-shadow:0 0 50px rgba(194,31,50,.08)}}
+
+
+/* lightweight polish */
+#fx{contain:strict}
+.noise{opacity:.035}
+.node-label,.mind-panel,.thought-card{backdrop-filter:blur(6px)}
+@media(max-width:800px){
+  .noise{opacity:.025}
+  .node-label,.mind-panel,.thought-card{backdrop-filter:none;background:rgba(5,5,5,.82)}
+}

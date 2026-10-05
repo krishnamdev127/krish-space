@@ -35,8 +35,8 @@ main{position:relative;z-index:5}
 #mind{min-height:240vh;background:linear-gradient(180deg,#050505 0%,#070507 55%,#020202 100%)}
 .mind-sticky{position:sticky;top:0;height:100vh;overflow:hidden}.mind-copy{position:absolute;left:7vw;top:16vh;z-index:8;max-width:620px}.eyebrow{font:400 9px var(--mono);letter-spacing:.3em;color:var(--red2);text-transform:uppercase}.mind-copy h2{margin:25px 0 0;font:500 clamp(60px,10vw,150px)/.84 var(--serif);letter-spacing:-.06em}.mind-copy h2 em{font-style:italic;font-weight:500;color:transparent;-webkit-text-stroke:1px rgba(238,234,227,.35)}.mind-copy p{margin:32px 0 0;max-width:430px;font:400 14px/1.8 var(--mono);color:#858078}.node-label{position:absolute;z-index:9;font:400 8px var(--mono);letter-spacing:.18em;color:#aaa49a;text-transform:uppercase;opacity:0;transform:translateY(10px)}.node-label b{color:var(--red2);font-weight:400}.label1{left:15%;top:63%}.label2{right:12%;top:36%}.label3{right:24%;bottom:15%}
 .marker{position:absolute;z-index:10;width:8px;height:8px;border-radius:50%;background:#f3e8df;box-shadow:0 0 22px rgba(255,83,99,.9);opacity:0}.marker:after{content:"";position:absolute;inset:-8px;border:1px solid rgba(255,83,99,.35);border-radius:50%;animation:ring 1.8s ease-out infinite}@keyframes ring{to{transform:scale(2.5);opacity:0}}
-#archive{min-height:100vh;display:grid;place-items:center;padding:14vh 7vw}.archive-inner{width:min(1100px,100%)}.archive-top{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px}.archive-top span{font:400 9px var(--mono);letter-spacing:.25em;color:#77736c}.archive-top h2{margin:0;font:500 clamp(60px,10vw,145px)/.8 var(--serif);letter-spacing:-.06em}.artifact{display:grid;grid-template-columns:80px 1fr 180px;gap:25px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);transition:transform .5s,color .3s}.artifact:hover{transform:translateX(18px);color:#fff}.artifact .num{font:400 10px var(--mono);color:var(--red2)}.artifact h3{margin:0;font:500 clamp(24px,3vw,42px)/1 var(--serif)}.artifact p{margin:6px 0 0;font:400 10px/1.6 var(--mono);color:#77736c}.artifact .go{font:400 9px var(--mono);letter-spacing:.2em;text-align:right;color:#77736c}
-@media(max-width:800px){header{padding:0 6vw}.status{display:none}.character{width:80vw;right:-6vw;height:72vh;opacity:.78}.title{font-size:25vw;bottom:17vh;left:6vw}.title small{margin-top:20px}.boot{bottom:7vh;left:6vw}.enter{bottom:7vh;right:6vw}.mind-copy{left:6vw;top:15vh}.mind-copy h2{font-size:20vw}.mind-copy p{font-size:11px;max-width:330px}.archive-top h2{font-size:20vw}.artifact{grid-template-columns:42px 1fr}.artifact .go{display:none}}
+#identity{min-height:125vh;background:#070707;display:grid;place-items:center;padding:12vh 7vw}.identity-inner{width:min(1180px,100%)}.identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:center;margin-top:7vh}.identity-portrait{height:62vh;min-height:430px;position:relative;display:grid;place-items:center}.portrait-ring{width:min(34vw,430px);height:min(34vw,430px);border:1px solid rgba(255,83,99,.3);border-radius:50%;box-shadow:0 0 100px rgba(194,31,50,.08),inset 0 0 80px rgba(194,31,50,.04);animation:spin 18s linear infinite}.portrait-core{position:absolute;width:150px;height:150px;border:1px solid rgba(238,234,227,.3);display:grid;place-items:center;font:italic 500 100px var(--serif);color:#eeeae3;transform:rotate(-8deg)}.orbit{position:absolute;font:400 8px var(--mono);letter-spacing:.25em;color:#77736c}.o1{top:15%;left:8%}.o2{right:4%;top:45%}.o3{bottom:13%;left:24%}@keyframes spin{to{transform:rotate(360deg)}}.identity-copy .fragment{font:400 9px var(--mono);letter-spacing:.3em;color:var(--red2)}.identity-copy h2{font:500 clamp(75px,10vw,150px)/.78 var(--serif);letter-spacing:-.07em;margin:24px 0}.identity-copy h2 em{color:transparent;-webkit-text-stroke:1px rgba(238,234,227,.4);font-style:italic}.identity-copy p{max-width:500px;color:#858078;font:400 13px/1.9 var(--mono)}.traits{display:flex;gap:24px;margin-top:40px;font:400 8px var(--mono);letter-spacing:.16em;color:#aaa49a}.traits span:first-child{color:var(--red2)}#thoughts{min-height:180vh;background:#050505}.thought-sticky{height:100vh;position:sticky;top:0;overflow:hidden}.thought-backdrop{position:absolute;right:-4vw;top:10vh;font:500 22vw/.7 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(238,234,227,.055);letter-spacing:-.08em}.thought-copy{position:absolute;left:7vw;top:17vh;z-index:5}.thought-copy h2{font:500 clamp(55px,8vw,120px)/.86 var(--serif);letter-spacing:-.06em;margin:25px 0}.thought-copy h2 em{color:transparent;-webkit-text-stroke:1px rgba(255,83,99,.5);font-style:italic}.thought-copy p{font:400 11px/1.8 var(--mono);color:#77736c;max-width:330px}.thought-card{position:absolute;padding:24px 28px;border:1px solid var(--line);background:rgba(8,8,8,.72);backdrop-filter:blur(10px);width:min(330px,36vw);z-index:6;transition:transform .5s,border-color .4s}.thought-card:hover{transform:translateY(-8px);border-color:rgba(255,83,99,.45)}.thought-card span{display:block;font:400 8px var(--mono);letter-spacing:.2em;color:var(--red2);margin-bottom:25px}.thought-card strong{font:500 24px/1.05 var(--serif)}.c1{right:10%;top:23%}.c2{right:28%;top:57%}.c3{right:6%;bottom:10%}#archive{min-height:100vh;display:grid;place-items:center;padding:14vh 7vw}#finale{min-height:110vh;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,rgba(194,31,50,.12),transparent 38%),#030303;padding:10vh 7vw}.finale-inner{width:min(1200px,100%);text-align:center}.finale-word{font:500 clamp(80px,16vw,230px)/.75 var(--serif);letter-spacing:-.08em;margin:8vh 0 5vh}.finale-word em{font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(238,234,227,.42)}.finale-inner p{font:400 10px var(--mono);color:#77736c}.finale-link{display:inline-flex;gap:16px;align-items:center;margin-top:42px;padding:18px 24px;border:1px solid rgba(238,234,227,.18);font:400 9px var(--mono);letter-spacing:.2em;transition:.4s}.finale-link:hover{border-color:var(--red2);transform:translateY(-4px)}.finale-link span{color:var(--red2)}.finale-meta{display:flex;justify-content:space-between;margin-top:18vh;padding-top:20px;border-top:1px solid var(--line);font:400 8px var(--mono);letter-spacing:.14em;color:#55514c}.archive-inner{width:min(1100px,100%)}.archive-top{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px}.archive-top span{font:400 9px var(--mono);letter-spacing:.25em;color:#77736c}.archive-top h2{margin:0;font:500 clamp(60px,10vw,145px)/.8 var(--serif);letter-spacing:-.06em}.artifact{display:grid;grid-template-columns:80px 1fr 180px;gap:25px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);transition:transform .5s,color .3s}.artifact:hover{transform:translateX(18px);color:#fff}.artifact .num{font:400 10px var(--mono);color:var(--red2)}.artifact h3{margin:0;font:500 clamp(24px,3vw,42px)/1 var(--serif)}.artifact p{margin:6px 0 0;font:400 10px/1.6 var(--mono);color:#77736c}.artifact .go{font:400 9px var(--mono);letter-spacing:.2em;text-align:right;color:#77736c}
+@media(max-width:800px){.identity-grid{grid-template-columns:1fr;gap:0}.identity-portrait{height:42vh;min-height:280px}.portrait-ring{width:65vw;height:65vw}.identity-copy h2{font-size:22vw}.traits{flex-wrap:wrap}.thought-card{width:220px;padding:18px}.thought-card strong{font-size:18px}.c1{right:5%;top:18%}.c2{left:7%;top:58%}.c3{right:4%;bottom:8%}.finale-word{font-size:25vw}.finale-meta{margin-top:14vh;flex-direction:column;gap:12px}@media(max-width:800px){header{padding:0 6vw}.status{display:none}.character{width:80vw;right:-6vw;height:72vh;opacity:.78}.title{font-size:25vw;bottom:17vh;left:6vw}.title small{margin-top:20px}.boot{bottom:7vh;left:6vw}.enter{bottom:7vh;right:6vw}.mind-copy{left:6vw;top:15vh}.mind-copy h2{font-size:20vw}.mind-copy p{font-size:11px;max-width:330px}.archive-top h2{font-size:20vw}.artifact{grid-template-columns:42px 1fr}.artifact .go{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.enter i,.marker:after{animation:none}}
 </style>
 </head>
@@ -73,6 +73,34 @@ main{position:relative;z-index:5}
 <div class="marker" id="m1"></div><div class="marker" id="m2"></div><div class="marker" id="m3"></div>
 </div></section>
 
+<section id="identity" class="scene">
+<div class="identity-inner">
+  <div class="eyebrow">04 / IDENTITY</div>
+  <div class="identity-grid">
+    <div class="identity-portrait">
+      <div class="portrait-ring"></div><div class="portrait-core">K</div>
+      <span class="orbit o1">CURIOUS</span><span class="orbit o2">BUILD</span><span class="orbit o3">THINK</span>
+    </div>
+    <div class="identity-copy">
+      <div class="fragment">NOT A TITLE.</div>
+      <h2>JUST<br><em>KRISH.</em></h2>
+      <p>I build things because understanding something is more interesting when you can make it real. History, technology, literature, design — different doors into the same curiosity.</p>
+      <div class="traits"><span>01 / OBSERVE</span><span>02 / QUESTION</span><span>03 / CREATE</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="thoughts" class="scene">
+<div class="thought-sticky">
+  <div class="thought-backdrop">THOUGHT</div>
+  <div class="thought-copy"><div class="eyebrow">05 / SIGNAL</div><h2>Some thoughts<br>should remain<br><em>unfinished.</em></h2><p>Ideas, questions, fragments and things worth coming back to.</p></div>
+  <div class="thought-card c1"><span>FRAGMENT / 001</span><strong>What if a portfolio<br>could feel like a memory?</strong></div>
+  <div class="thought-card c2"><span>FRAGMENT / 002</span><strong>Build less.<br>Mean more.</strong></div>
+  <div class="thought-card c3"><span>FRAGMENT / 003</span><strong>The interesting part<br>is always underneath.</strong></div>
+</div>
+</section>
+
 <section id="archive">
 <div class="archive-inner">
 <div class="archive-top"><span>03 / THE ARCHIVE</span><h2>ARTIFACTS</h2></div>
@@ -80,6 +108,16 @@ main{position:relative;z-index:5}
 <a class="artifact" href="#"><span class="num">02</span><div><h3>Krish Space</h3><p>The experiment you're standing inside right now.</p></div><span class="go">OPEN ↗</span></a>
 <a class="artifact" href="#"><span class="num">03</span><div><h3>Next Artifact</h3><p>Something that doesn't exist yet.</p></div><span class="go">LOCKED</span></a>
 </div></section>
+
+<section id="finale" class="scene">
+<div class="finale-inner">
+  <div class="eyebrow">06 / END OF TRANSMISSION</div>
+  <div class="finale-word">STAY<br><em>CURIOUS.</em></div>
+  <p>If something here made you stop scrolling, that's enough.</p>
+  <a class="finale-link" href="mailto:hello@krish.space">START A CONVERSATION <span>↗</span></a>
+  <div class="finale-meta"><span>© 2026 KriSh</span><span>THE SYSTEM NEVER REALLY ENDS.</span></div>
+</div>
+</section>
 </main>
 
 <script>

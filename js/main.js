@@ -12,7 +12,7 @@ function draw(){t+=.008;scrollY+=(targetScroll-scrollY)*.075;ctx.clearRect(0,0,w
  for(let i=0;i<N;i++){let p=pts[i],ang=p.a+t*p.v*(1-intro)+p.phase*.0001,baseRad=p.rr*(1-intro*.88)+Math.sin(t*2+p.phase)*12*intro;
    const fragmentAngle=p.a+Math.sin(p.phase*3)*.18;
    const fragmentRadius=disintegration*disintegration*(Math.min(w,h)*(.18+.52*p.r));
-   rad=baseRad+fragmentRadius;
+   const rad=baseRad+fragmentRadius;
    p.x=cx+Math.cos(ang)*rad+Math.cos(fragmentAngle)*fragmentRadius*.42;
    p.y=cy+Math.sin(ang)*rad*.72+Math.sin(fragmentAngle)*fragmentRadius*.32;
    if(intro>.22){const j=i%9===0?i:((i*37)%N),q=pts[j];if(j!==i){const dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy);if(d<105){ctx.strokeStyle='rgba(194,31,50,'+((1-d/105)*.22*intro)+')';ctx.lineWidth=.55;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke()}}}
@@ -84,7 +84,6 @@ function frame(){const y=scrollY,vh=innerHeight,p=Math.max(0,Math.min(1,y/(vh*1.
 if(canAnimate&&!reduced){
   gsap.to('.character',{filter:'drop-shadow(0 0 70px rgba(194,31,50,.12))',duration:2.8,ease:'sine.inOut',repeat:-1,yoyo:true});
   gsap.to('.character',{x:'+=5',duration:1.8,ease:'sine.inOut',repeat:-1,yoyo:true});
-  gsap.to('.flash',{opacity:0,duration:1,repeat:-1,yoyo:true,repeatDelay:8,ease:'sine.inOut'});
 
   gsap.to('.char-mark',{opacity:.98,duration:1.7,ease:'sine.inOut',repeat:-1,yoyo:true,stagger:.18});
   gsap.to('.portrait-ring',{rotation:360,duration:22,ease:'none',repeat:-1});

@@ -32,3 +32,9 @@ main{position:relative;z-index:5}
 .character:after{transition:opacity .5s,transform .5s}
 .character.dissolve:after{transform:scale(1.35)}
 @media(max-width:800px){.character{perspective:700px}}
+
+.mind-sticky:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(194,31,50,.07),transparent 34%,rgba(0,0,0,.5) 82%);opacity:.8}
+.node-label{will-change:transform,opacity}
+.node-label:after{content:"";position:absolute;inset:-1px;border:1px solid transparent;transition:.4s;pointer-events:none}
+.node-label:hover:after,.node-label.active:after{inset:-7px;border-color:rgba(255,83,99,.12)}
+.marker{will-change:transform,opacity}

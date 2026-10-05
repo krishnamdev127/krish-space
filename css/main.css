@@ -38,3 +38,8 @@ main{position:relative;z-index:5}
 .node-label:after{content:"";position:absolute;inset:-1px;border:1px solid transparent;transition:.4s;pointer-events:none}
 .node-label:hover:after,.node-label.active:after{inset:-7px;border-color:rgba(255,83,99,.12)}
 .marker{will-change:transform,opacity}
+
+#identity{position:relative;overflow:hidden}
+#identity:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 48%,rgba(194,31,50,.1),transparent 25%,transparent 58%,rgba(0,0,0,.45));opacity:.8}
+.identity-inner{position:relative;z-index:2;will-change:transform,opacity}
+.portrait-core,.portrait-ring{will-change:transform,opacity}
